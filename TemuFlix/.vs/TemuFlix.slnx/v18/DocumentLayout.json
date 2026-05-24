@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2C0E2FF3-586E-497B-BACA-AED9DC25D9CD}|TemuFlix\\TemuFlix.csproj|e:\\studia_pliki\\temuflix\\temuflix\\temuflix\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2C0E2FF3-586E-497B-BACA-AED9DC25D9CD}|TemuFlix\\TemuFlix.csproj|solutionrelative:temuflix\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|e:\\studia_pliki\\temuflix\\temuflix\\temuflix\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|solutionrelative:temuflix\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2C0E2FF3-586E-497B-BACA-AED9DC25D9CD}|TemuFlix\\TemuFlix.csproj|e:\\studia_pliki\\temuflix\\temuflix\\temuflix\\controllers\\moviescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2C0E2FF3-586E-497B-BACA-AED9DC25D9CD}|TemuFlix\\TemuFlix.csproj|solutionrelative:temuflix\\controllers\\moviescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|e:\\studia_pliki\\temuflix\\temuflix\\temuflix\\controllers\\moviescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|solutionrelative:temuflix\\controllers\\moviescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -28,7 +28,7 @@
               "RelativeDocumentMoniker": "TemuFlix\\Program.cs",
               "ToolTip": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix\\Program.cs",
               "RelativeToolTip": "TemuFlix\\Program.cs",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAADgAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAADcAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-24T07:47:05.033Z",
               "EditorCaption": ""
@@ -43,8 +43,7 @@
               "RelativeToolTip": "TemuFlix\\Controllers\\MoviesController.cs",
               "ViewState": "AgIAAEwAAAAAAAAAAAAcwFAAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-24T07:45:43.861Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-24T07:45:43.861Z"
             }
           ]
         }

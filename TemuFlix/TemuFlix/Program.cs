@@ -53,7 +53,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
-// Serwisy
+// Serwisy 
 builder.Services.AddScoped<JwtService>();
 
 builder.Services.AddHttpClient<OmdbService>(client =>
