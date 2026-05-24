@@ -1,0 +1,815 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TemuFlix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0f;
+            color: #e8e8f0;
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
+        }
+
+        /* ── NAV ── */
+        nav {
+            background: #0d0d14;
+            border-bottom: 1px solid #1e1e2e;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #fff;
+        }
+
+            .logo span {
+                color: #e63946;
+            }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+            .nav-links a {
+                color: #888;
+                text-decoration: none;
+                font-size: 0.9rem;
+                font-family: sans-serif;
+                transition: color 0.2s;
+            }
+
+                .nav-links a:hover {
+                    color: #fff;
+                }
+
+        #btnOpenLogin {
+            background: #e63946;
+            color: #fff;
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: sans-serif;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            padding: 3rem 2rem 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+            .hero h1 {
+                font-size: 2rem;
+                font-weight: 400;
+                letter-spacing: -0.5px;
+                margin-bottom: 0.5rem;
+            }
+
+                .hero h1 em {
+                    color: #e63946;
+                    font-style: italic;
+                }
+
+            .hero p {
+                color: #666;
+                font-family: sans-serif;
+                font-size: 0.9rem;
+            }
+
+        /* ── SEARCH ── */
+        .search-bar {
+            max-width: 1100px;
+            margin: 1.5rem auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+            .search-bar input {
+                flex: 1;
+                background: #13131a;
+                border: 1px solid #1e1e2e;
+                color: #e8e8f0;
+                padding: 0.65rem 1rem;
+                border-radius: 6px;
+                font-size: 0.9rem;
+                outline: none;
+                font-family: sans-serif;
+            }
+
+                .search-bar input:focus {
+                    border-color: #e63946;
+                }
+
+            .search-bar button {
+                background: #e63946;
+                color: #fff;
+                border: none;
+                padding: 0.65rem 1.25rem;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 0.85rem;
+                font-family: sans-serif;
+                font-weight: 600;
+                white-space: nowrap;
+            }
+
+                .search-bar button:hover {
+                    background: #c1121f;
+                }
+
+        /* ── STATS ── */
+        .stats {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .stat {
+            background: #13131a;
+            border: 1px solid #1e1e2e;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e63946;
+            font-family: sans-serif;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: #666;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.25rem;
+        }
+
+        /* ── GRID ── */
+        .section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .section-title {
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: #aaa;
+            margin-bottom: 1.25rem;
+            font-family: sans-serif;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .movie-card {
+            background: #13131a;
+            border: 1px solid #1e1e2e;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+            .movie-card:hover {
+                transform: translateY(-4px);
+                border-color: #e63946;
+            }
+
+        .movie-poster {
+            width: 100%;
+            aspect-ratio: 2/3;
+            background: #1a1a24;
+            overflow: hidden;
+            position: relative;
+        }
+
+            .movie-poster img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+        .poster-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #2a2a3a;
+        }
+
+        .movie-info {
+            padding: 0.75rem;
+        }
+
+        .movie-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: sans-serif;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 0.2rem;
+        }
+
+        .genre-tag {
+            font-size: 0.65rem;
+            color: #e63946;
+            font-family: sans-serif;
+            margin-bottom: 0.35rem;
+        }
+
+        .movie-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .movie-year {
+            font-size: 0.75rem;
+            color: #666;
+            font-family: sans-serif;
+        }
+
+        .rating-badge {
+            background: #1e1e1e;
+            color: #f4c430;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: sans-serif;
+        }
+
+        .add-card {
+            border: 1px dashed #2a2a3a !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 260px;
+            flex-direction: column;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+            .add-card:hover {
+                border-color: #e63946 !important;
+            }
+
+        .add-card-icon {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .add-card-label {
+            font-size: 0.75rem;
+            color: #555;
+            font-family: sans-serif;
+        }
+
+        /* ── FAB ── */
+        .fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #e63946;
+            color: #fff;
+            border: none;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(230,57,70,0.4);
+            transition: background 0.2s, transform 0.1s;
+        }
+
+            .fab:hover {
+                background: #c1121f;
+                transform: scale(1.05);
+            }
+
+        /* ── MODAL ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .modal-overlay.open {
+                display: flex;
+            }
+
+        .modal {
+            background: #13131a;
+            border: 1px solid #1e1e2e;
+            border-radius: 12px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 440px;
+            margin: 1rem;
+        }
+
+            .modal h2 {
+                font-size: 1.25rem;
+                font-weight: 500;
+                margin-bottom: 1.5rem;
+                font-family: sans-serif;
+            }
+
+            .modal label {
+                display: block;
+                font-size: 0.8rem;
+                color: #888;
+                font-family: sans-serif;
+                margin-bottom: 0.35rem;
+                margin-top: 1rem;
+            }
+
+            .modal input, .modal textarea, .modal select {
+                width: 100%;
+                background: #0d0d14;
+                border: 1px solid #1e1e2e;
+                color: #e8e8f0;
+                padding: 0.6rem 0.75rem;
+                border-radius: 6px;
+                font-size: 0.9rem;
+                font-family: sans-serif;
+                outline: none;
+            }
+
+                .modal input:focus, .modal textarea:focus {
+                    border-color: #e63946;
+                }
+
+            .modal textarea {
+                min-height: 80px;
+                resize: vertical;
+            }
+
+        .modal-btns {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            justify-content: flex-end;
+        }
+
+        .btn-cancel {
+            background: transparent;
+            color: #888;
+            border: 1px solid #2a2a3a;
+            padding: 0.55rem 1.25rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: sans-serif;
+        }
+
+            .btn-cancel:hover {
+                color: #fff;
+                border-color: #444;
+            }
+
+        .btn-submit {
+            background: #e63946;
+            color: #fff;
+            border: none;
+            padding: 0.55rem 1.25rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: sans-serif;
+            font-weight: 600;
+        }
+
+            .btn-submit:hover {
+                background: #c1121f;
+            }
+
+        /* ── TOAST ── */
+        .toast {
+            position: fixed;
+            bottom: 5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e1e2e;
+            color: #e8e8f0;
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            font-family: sans-serif;
+            font-size: 0.85rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 300;
+            border: 1px solid #2a2a3a;
+        }
+
+            .toast.show {
+                opacity: 1;
+            }
+
+        /* ── LOADING ── */
+        #loading {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            font-family: sans-serif;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        #errorMsg {
+            max-width: 1100px;
+            margin: 1rem auto;
+            padding: 0 2rem;
+            font-family: sans-serif;
+            font-size: 0.85rem;
+            color: #e63946;
+        }
+
+        /* delete btn inside card */
+        .btn-delete {
+            background: transparent;
+            border: none;
+            color: #555;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-family: sans-serif;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            transition: color 0.2s;
+        }
+
+            .btn-delete:hover {
+                color: #e63946;
+            }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="logo">Temu<span>Flix</span></div>
+        <div class="nav-links">
+            <a href="#">Filmy</a>
+            <a href="/swagger" target="_blank">Swagger API</a>
+            <button id="btnOpenLogin">Zaloguj się</button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+        <h1>Odkryj swój następny <em>ulubiony film</em></h1>
+        <p>Baza filmów z cenami w PLN i USD • Wyszukuj przez OMDB • Kursy walut NBP</p>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Szukaj w OMDB: np. Inception, Matrix..." />
+        <button id="btnSearch">🔍 Szukaj OMDB</button>
+    </div>
+
+    <!-- LOADING / ERROR -->
+    <div id="loading" style="display:none">Ładowanie filmów...</div>
+    <div id="errorMsg"></div>
+
+    <!-- STATS -->
+    <div class="stats">
+        <div class="stat"><div class="stat-num" id="statCount">—</div><div class="stat-label">Filmy</div></div>
+        <div class="stat"><div class="stat-num" id="statDirectors">—</div><div class="stat-label">Reżyserzy</div></div>
+        <div class="stat"><div class="stat-num" id="statAvgRating">—</div><div class="stat-label">Śr. ocena</div></div>
+        <div class="stat"><div class="stat-num" id="statUsdRate">—</div><div class="stat-label">USD/PLN (NBP)</div></div>
+    </div>
+
+    <!-- GRID -->
+    <div class="section">
+        <div class="section-title">Wszystkie filmy</div>
+        <div class="movies-grid" id="moviesGrid">
+            <!-- wypełniane przez JS -->
+        </div>
+    </div>
+
+    <!-- FAB -->
+    <button class="fab" id="fabBtn" title="Dodaj film">+</button>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <!-- MODAL: Dodaj film -->
+    <div class="modal-overlay" id="modalAdd">
+        <div class="modal">
+            <h2>Dodaj nowy film</h2>
+            <label>Tytuł *</label>
+            <input type="text" id="addTitle" placeholder="np. The Dark Knight" />
+            <label>Rok</label>
+            <input type="number" id="addYear" placeholder="np. 2008" min="1888" max="2030" />
+            <label>Reżyser</label>
+            <input type="text" id="addDirector" placeholder="np. Christopher Nolan" />
+            <label>Gatunek</label>
+            <input type="text" id="addGenre" placeholder="np. Action, Sci-Fi" />
+            <label>Opis</label>
+            <textarea id="addDescription" placeholder="Krótki opis fabuły..."></textarea>
+            <label>Ocena (0–10)</label>
+            <input type="number" id="addRating" placeholder="np. 9.0" min="0" max="10" step="0.1" />
+            <label>Cena (USD)</label>
+            <input type="number" id="addPrice" placeholder="np. 9.99" min="0" step="0.01" />
+            <label>URL plakatu (opcjonalnie)</label>
+            <input type="text" id="addPoster" placeholder="https://..." />
+            <div class="modal-btns">
+                <button class="btn-cancel" id="btnCancelAdd">Anuluj</button>
+                <button class="btn-submit" id="btnSubmitAdd">Dodaj film</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Logowanie (placeholder — Etap 2) -->
+    <div class="modal-overlay" id="modalLogin">
+        <div class="modal">
+            <h2>Zaloguj się</h2>
+            <label>Email</label>
+            <input type="email" id="loginEmail" placeholder="user@example.com" />
+            <label>Hasło</label>
+            <input type="password" id="loginPassword" placeholder="••••••••" />
+            <div class="modal-btns">
+                <button class="btn-cancel" id="btnCancelLogin">Anuluj</button>
+                <button class="btn-submit" id="btnSubmitLogin">Zaloguj</button>
+            </div>
+            <p style="margin-top:1rem; font-size:0.8rem; color:#555; font-family:sans-serif; text-align:center;">
+                JWT autoryzacja — dostępna w Etapie 2
+            </p>
+        </div>
+    </div>
+
+    <script>
+  const API = '/api';
+  let usdRate = null;
+
+  // ── Helpers ──────────────────────────────────────
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  function showError(msg) {
+    document.getElementById('errorMsg').textContent = msg;
+  }
+
+  function clearError() {
+    document.getElementById('errorMsg').textContent = '';
+  }
+
+  // ── Fetch NBP rate ────────────────────────────────
+  async function fetchUsdRate() {
+    try {
+      const res = await fetch('https://api.nbp.pl/api/exchangerates/rates/A/USD?format=json');
+      if (!res.ok) return;
+      const data = await res.json();
+      usdRate = data.rates[0].mid;
+      document.getElementById('statUsdRate').textContent = usdRate.toFixed(4);
+    } catch {
+      document.getElementById('statUsdRate').textContent = 'N/A';
+    }
+  }
+
+  // ── Render movies ─────────────────────────────────
+  function renderMovies(movies) {
+    const grid = document.getElementById('moviesGrid');
+    grid.innerHTML = '';
+
+    movies.forEach(m => {
+      const card = document.createElement('div');
+      card.className = 'movie-card';
+
+      const priceText = (usdRate && m.priceUSD)
+        ? `$${m.priceUSD.toFixed(2)} / ${(m.priceUSD * usdRate).toFixed(2)} PLN`
+        : (m.priceUSD ? `$${m.priceUSD.toFixed(2)}` : '');
+
+      card.innerHTML = `
+        <div class="movie-poster">
+          ${m.posterUrl
+            ? `<img src="${m.posterUrl}" alt="${m.title}" onerror="this.parentElement.innerHTML='<div class=poster-placeholder>🎬</div>'" />`
+            : '<div class="poster-placeholder">🎬</div>'}
+        </div>
+        <div class="movie-info">
+          <div class="movie-title" title="${m.title}">${m.title}</div>
+          <div class="genre-tag">${m.genre || ''}</div>
+          <div class="movie-meta">
+            <span class="movie-year">${m.year || ''}</span>
+            <span class="rating-badge">★ ${m.rating || '—'}</span>
+          </div>
+          ${priceText ? `<div style="font-size:0.7rem;color:#555;font-family:sans-serif;margin-top:0.3rem">${priceText}</div>` : ''}
+          <div style="margin-top:0.5rem;text-align:right">
+            <button class="btn-delete" data-id="${m.id}" title="Usuń film">🗑 Usuń</button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    // Karta "dodaj"
+    const addCard = document.createElement('div');
+    addCard.className = 'movie-card add-card';
+    addCard.innerHTML = `<div class="add-card-icon">+</div><div class="add-card-label">Dodaj film</div>`;
+    addCard.addEventListener('click', openAddModal);
+    grid.appendChild(addCard);
+
+    // Event listeners na delete
+    grid.querySelectorAll('.btn-delete').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        deleteMovie(parseInt(btn.dataset.id));
+      });
+    });
+
+    updateStats(movies);
+  }
+
+  // ── Stats ─────────────────────────────────────────
+  function updateStats(movies) {
+    document.getElementById('statCount').textContent = movies.length;
+    const dirs = new Set(movies.map(m => m.director).filter(Boolean));
+    document.getElementById('statDirectors').textContent = dirs.size;
+    const rated = movies.filter(m => m.rating);
+    const avg = rated.length ? (rated.reduce((s, m) => s + m.rating, 0) / rated.length).toFixed(1) : '—';
+    document.getElementById('statAvgRating').textContent = avg;
+  }
+
+  // ── Load movies ───────────────────────────────────
+  async function loadMovies() {
+    clearError();
+    document.getElementById('loading').style.display = 'block';
+    try {
+      const res = await fetch(`${API}/movies`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      renderMovies(json.data || []);
+    } catch (e) {
+      showError(`Nie można połączyć z API: ${e.message}. Upewnij się że backend działa.`);
+    } finally {
+      document.getElementById('loading').style.display = 'none';
+    }
+  }
+
+  // ── Delete movie ──────────────────────────────────
+  async function deleteMovie(id) {
+    if (!confirm('Usunąć ten film?')) return;
+    try {
+      const res = await fetch(`${API}/movies/${id}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      toast('Film usunięty ✓');
+      loadMovies();
+    } catch (e) {
+      toast('Błąd usuwania: ' + e.message);
+    }
+  }
+
+  // ── Add movie ─────────────────────────────────────
+  async function submitAdd() {
+    const title = document.getElementById('addTitle').value.trim();
+    if (!title) { toast('Tytuł jest wymagany!'); return; }
+
+    const movie = {
+      title,
+      year: parseInt(document.getElementById('addYear').value) || 0,
+      director: document.getElementById('addDirector').value.trim(),
+      genre: document.getElementById('addGenre').value.trim(),
+      description: document.getElementById('addDescription').value.trim(),
+      rating: parseFloat(document.getElementById('addRating').value) || 0,
+      priceUSD: parseFloat(document.getElementById('addPrice').value) || 0,
+      posterUrl: document.getElementById('addPoster').value.trim() || null,
+    };
+
+    try {
+      const res = await fetch(`${API}/movies`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(movie)
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        toast('Błąd: ' + (err.message || res.status));
+        return;
+      }
+      closeAddModal();
+      toast('Film dodany pomyślnie ✓');
+      loadMovies();
+    } catch (e) {
+      toast('Błąd połączenia: ' + e.message);
+    }
+  }
+
+  // ── OMDB Search ───────────────────────────────────
+  async function searchOmdb() {
+    const query = document.getElementById('searchInput').value.trim();
+    if (!query) { toast('Wpisz tytuł do szukania'); return; }
+
+    try {
+      const res = await fetch(`${API}/omdb/search?title=${encodeURIComponent(query)}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      if (json.data) {
+        // Wypełnij formularz danymi z OMDB
+        document.getElementById('addTitle').value = json.data.title || '';
+        document.getElementById('addYear').value = json.data.year || '';
+        document.getElementById('addDirector').value = json.data.director || '';
+        document.getElementById('addGenre').value = json.data.genre || '';
+        document.getElementById('addDescription').value = json.data.plot || '';
+        document.getElementById('addRating').value = json.data.imdbRating || '';
+        document.getElementById('addPoster').value = json.data.poster || '';
+        openAddModal();
+        toast('Znaleziono w OMDB — sprawdź dane ✓');
+      } else {
+        toast('Nie znaleziono w OMDB');
+      }
+    } catch {
+      toast('OMDB API niedostępne (dodaj film ręcznie)');
+      openAddModal();
+    }
+  }
+
+  // ── Modal helpers ─────────────────────────────────
+  function openAddModal() {
+    document.getElementById('modalAdd').classList.add('open');
+  }
+  function closeAddModal() {
+    document.getElementById('modalAdd').classList.remove('open');
+    ['addTitle','addYear','addDirector','addGenre','addDescription','addRating','addPrice','addPoster']
+      .forEach(id => document.getElementById(id).value = '');
+  }
+
+  // ── Event listeners ───────────────────────────────
+  document.getElementById('fabBtn').addEventListener('click', openAddModal);
+  document.getElementById('btnCancelAdd').addEventListener('click', closeAddModal);
+  document.getElementById('btnSubmitAdd').addEventListener('click', submitAdd);
+  document.getElementById('btnSearch').addEventListener('click', searchOmdb);
+  document.getElementById('searchInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') searchOmdb();
+  });
+
+  document.getElementById('btnOpenLogin').addEventListener('click', () => {
+    document.getElementById('modalLogin').classList.add('open');
+  });
+  document.getElementById('btnCancelLogin').addEventListener('click', () => {
+    document.getElementById('modalLogin').classList.remove('open');
+  });
+  document.getElementById('btnSubmitLogin').addEventListener('click', () => {
+    toast('JWT logowanie — dostępne po Etapie 2');
+  });
+
+  // Zamknij modal klikając tło
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) overlay.classList.remove('open');
+    });
+  });
+
+  // ── Init ──────────────────────────────────────────
+  fetchUsdRate();
+  loadMovies();
+    </script>
+</body>
+</html>
