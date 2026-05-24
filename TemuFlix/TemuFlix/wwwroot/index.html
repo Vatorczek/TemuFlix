@@ -495,7 +495,10 @@
         <div class="nav-links">
             <a href="#">Filmy</a>
             <a href="/swagger" target="_blank">Swagger API</a>
-            <button id="btnOpenLogin">Zaloguj się</button>
+            <button id="btnOpenLogin" type="button">Zaloguj się</button>
+            <button id="btnOpenRegister" class="btn-secondary" type="button" style="border-radius:6px; padding:0.4rem 1rem;">
+                Rejestracja
+            </button>
         </div>
     </nav>
 
@@ -508,7 +511,35 @@
     <!-- SEARCH -->
     <div class="search-bar">
         <input type="text" id="searchInput" placeholder="Szukaj w OMDB: np. Inception, Matrix..." />
-        <button id="btnSearch">🔍 Szukaj OMDB</button>
+        <button id="btnSearch" type="button">🔍 Szukaj OMDB</button>
+    </div>
+
+    <!-- OMDB RESULT (wariant B: pokazujemy wynik na stronie) -->
+    <div class="section" id="omdbResult" style="display:none; padding-top: 0;">
+        <div class="section-title">Wynik z OMDB</div>
+
+        <div class="movie-card" style="display:grid; grid-template-columns:180px 1fr; gap:1rem; padding:1rem;">
+            <div class="movie-poster" id="omdbPoster" style="border-radius:8px; overflow:hidden;">
+                <div class="poster-placeholder">🎬</div>
+            </div>
+
+            <div>
+                <div class="movie-title" id="omdbTitle" style="font-size:1.1rem; white-space:normal;">—</div>
+
+                <div id="omdbMeta"
+                     style="margin-top:0.35rem; color:#888; font-family:sans-serif; font-size:0.8rem;">
+                </div>
+
+                <div id="omdbPlot"
+                     style="margin-top:0.75rem; color:#bbb; font-family:sans-serif; font-size:0.9rem; line-height:1.35;">
+                </div>
+
+                <div style="margin-top:1rem; display:flex; gap:0.75rem; justify-content:flex-end;">
+                    <button class="btn-cancel" id="btnClearOmdb" type="button">Wyczyść</button>
+                    <button class="btn-submit" id="btnImportOmdb" type="button" disabled>Importuj do mojej bazy</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- LOADING / ERROR -->
@@ -576,240 +607,478 @@
                 <button class="btn-cancel" id="btnCancelLogin">Anuluj</button>
                 <button class="btn-submit" id="btnSubmitLogin">Zaloguj</button>
             </div>
+            <p id="authStatus"
+               style="margin-top:1rem; font-size:0.8rem; color:#555; font-family:sans-serif; text-align:center;">
+            </p>
+        </div>
+    </div>
+
+    <!-- MODAL: Rejestracja -->
+    <div class="modal-overlay" id="modalRegister">
+        <div class="modal">
+            <h2>Utwórz konto</h2>
+
+            <label>Nazwa użytkownika</label>
+            <input type="text" id="regUsername" placeholder="np. Vatorczek" />
+
+            <label>Email</label>
+            <input type="email" id="regEmail" placeholder="user@example.com" />
+
+            <label>Hasło</label>
+            <input type="password" id="regPassword" placeholder="••••••••" />
+
+            <div class="modal-btns">
+                <button class="btn-cancel" id="btnCancelRegister" type="button">Anuluj</button>
+                <button class="btn-submit" id="btnSubmitRegister" type="button">Zarejestruj</button>
+            </div>
+
             <p style="margin-top:1rem; font-size:0.8rem; color:#555; font-family:sans-serif; text-align:center;">
-                JWT autoryzacja — dostępna w Etapie 2
+                Masz już konto?
+                <a href="#" id="linkOpenLogin" style="color:#e63946; text-decoration:none;">Zaloguj się</a>
             </p>
         </div>
     </div>
 
     <script>
-  const API = '/api';
-  let usdRate = null;
+        const API = '/api';
+        let usdRate = null;
 
-  // ── Helpers ──────────────────────────────────────
-  function toast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2500);
-  }
+        // ── Helpers ──────────────────────────────────────
+        function toast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2500);
+        }
 
-  function showError(msg) {
-    document.getElementById('errorMsg').textContent = msg;
-  }
+        function showError(msg) {
+            document.getElementById('errorMsg').textContent = msg;
+        }
 
-  function clearError() {
-    document.getElementById('errorMsg').textContent = '';
-  }
+        function clearError() {
+            document.getElementById('errorMsg').textContent = '';
+        }
 
-  // ── Fetch NBP rate ────────────────────────────────
-  async function fetchUsdRate() {
-    try {
-      const res = await fetch('https://api.nbp.pl/api/exchangerates/rates/A/USD?format=json');
-      if (!res.ok) return;
-      const data = await res.json();
-      usdRate = data.rates[0].mid;
-      document.getElementById('statUsdRate').textContent = usdRate.toFixed(4);
-    } catch {
-      document.getElementById('statUsdRate').textContent = 'N/A';
-    }
-  }
+        // ── AUTH (JWT) ─────────────────────────────────────
+        const TOKEN_KEY = 'temuflix_token';
 
-  // ── Render movies ─────────────────────────────────
-  function renderMovies(movies) {
-    const grid = document.getElementById('moviesGrid');
-    grid.innerHTML = '';
+        function getToken() {
+            return localStorage.getItem(TOKEN_KEY);
+        }
 
-    movies.forEach(m => {
-      const card = document.createElement('div');
-      card.className = 'movie-card';
+        function setToken(token) {
+            localStorage.setItem(TOKEN_KEY, token);
+        }
 
-      const priceText = (usdRate && m.priceUSD)
-        ? `$${m.priceUSD.toFixed(2)} / ${(m.priceUSD * usdRate).toFixed(2)} PLN`
-        : (m.priceUSD ? `$${m.priceUSD.toFixed(2)}` : '');
+        function clearToken() {
+            localStorage.removeItem(TOKEN_KEY);
+        }
 
-      card.innerHTML = `
-        <div class="movie-poster">
-          ${m.posterUrl
-            ? `<img src="${m.posterUrl}" alt="${m.title}" onerror="this.parentElement.innerHTML='<div class=poster-placeholder>🎬</div>'" />`
-            : '<div class="poster-placeholder">🎬</div>'}
-        </div>
-        <div class="movie-info">
-          <div class="movie-title" title="${m.title}">${m.title}</div>
-          <div class="genre-tag">${m.genre || ''}</div>
-          <div class="movie-meta">
-            <span class="movie-year">${m.year || ''}</span>
-            <span class="rating-badge">★ ${m.rating || '—'}</span>
-          </div>
-          ${priceText ? `<div style="font-size:0.7rem;color:#555;font-family:sans-serif;margin-top:0.3rem">${priceText}</div>` : ''}
-          <div style="margin-top:0.5rem;text-align:right">
-            <button class="btn-delete" data-id="${m.id}" title="Usuń film">🗑 Usuń</button>
-          </div>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
+        function authHeaders(extra = {}) {
+            const token = getToken();
+            return token
+                ? { ...extra, Authorization: `Bearer ${token}` }
+                : { ...extra };
+        }
 
-    // Karta "dodaj"
-    const addCard = document.createElement('div');
-    addCard.className = 'movie-card add-card';
-    addCard.innerHTML = `<div class="add-card-icon">+</div><div class="add-card-label">Dodaj film</div>`;
-    addCard.addEventListener('click', openAddModal);
-    grid.appendChild(addCard);
+        async function apiFetch(url, options = {}) {
+            const headers = authHeaders(options.headers || {});
+            return fetch(url, { ...options, headers });
+        }
 
-    // Event listeners na delete
-    grid.querySelectorAll('.btn-delete').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        deleteMovie(parseInt(btn.dataset.id));
-      });
-    });
+        async function fetchMe() {
+            const token = getToken();
+            if (!token) {
+                document.getElementById('authStatus').textContent = 'Nie jesteś zalogowany.';
+                return null;
+            }
 
-    updateStats(movies);
-  }
+            try {
+                const res = await apiFetch(`${API}/auth/me`);
+                if (!res.ok) {
+                    clearToken();
+                    document.getElementById('authStatus').textContent = 'Sesja wygasła — zaloguj się ponownie.';
+                    return null;
+                }
 
-  // ── Stats ─────────────────────────────────────────
-  function updateStats(movies) {
-    document.getElementById('statCount').textContent = movies.length;
-    const dirs = new Set(movies.map(m => m.director).filter(Boolean));
-    document.getElementById('statDirectors').textContent = dirs.size;
-    const rated = movies.filter(m => m.rating);
-    const avg = rated.length ? (rated.reduce((s, m) => s + m.rating, 0) / rated.length).toFixed(1) : '—';
-    document.getElementById('statAvgRating').textContent = avg;
-  }
+                const json = await res.json();
+                const me = json.data;
+                document.getElementById('authStatus').textContent =
+                    `Zalogowany jako: ${me.username} (${me.email}) • rola: ${me.role}`;
 
-  // ── Load movies ───────────────────────────────────
-  async function loadMovies() {
-    clearError();
-    document.getElementById('loading').style.display = 'block';
-    try {
-      const res = await fetch(`${API}/movies`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const json = await res.json();
-      renderMovies(json.data || []);
-    } catch (e) {
-      showError(`Nie można połączyć z API: ${e.message}. Upewnij się że backend działa.`);
-    } finally {
-      document.getElementById('loading').style.display = 'none';
-    }
-  }
+                // UI (opcjonalnie): zmień tekst przycisku login
+                const btn = document.getElementById('btnOpenLogin');
+                btn.textContent = 'Profil';
+                return me;
+            } catch {
+                document.getElementById('authStatus').textContent = 'Błąd połączenia z API.';
+                return null;
+            }
+        }
 
-  // ── Delete movie ──────────────────────────────────
-  async function deleteMovie(id) {
-    if (!confirm('Usunąć ten film?')) return;
-    try {
-      const res = await fetch(`${API}/movies/${id}`, { method: 'DELETE' });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      toast('Film usunięty ✓');
-      loadMovies();
-    } catch (e) {
-      toast('Błąd usuwania: ' + e.message);
-    }
-  }
+        async function login() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
 
-  // ── Add movie ─────────────────────────────────────
-  async function submitAdd() {
-    const title = document.getElementById('addTitle').value.trim();
-    if (!title) { toast('Tytuł jest wymagany!'); return; }
+            if (!email || !password) {
+                toast('Podaj email i hasło');
+                return;
+            }
 
-    const movie = {
-      title,
-      year: parseInt(document.getElementById('addYear').value) || 0,
-      director: document.getElementById('addDirector').value.trim(),
-      genre: document.getElementById('addGenre').value.trim(),
-      description: document.getElementById('addDescription').value.trim(),
-      rating: parseFloat(document.getElementById('addRating').value) || 0,
-      priceUSD: parseFloat(document.getElementById('addPrice').value) || 0,
-      posterUrl: document.getElementById('addPoster').value.trim() || null,
-    };
+            try {
+                const res = await fetch(`${API}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
 
-    try {
-      const res = await fetch(`${API}/movies`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(movie)
-      });
-      if (!res.ok) {
-        const err = await res.json();
-        toast('Błąd: ' + (err.message || res.status));
-        return;
-      }
-      closeAddModal();
-      toast('Film dodany pomyślnie ✓');
-      loadMovies();
-    } catch (e) {
-      toast('Błąd połączenia: ' + e.message);
-    }
-  }
+                const json = await res.json();
 
-  // ── OMDB Search ───────────────────────────────────
-  async function searchOmdb() {
-    const query = document.getElementById('searchInput').value.trim();
-    if (!query) { toast('Wpisz tytuł do szukania'); return; }
+                if (!res.ok) {
+                    toast(json.message || `Błąd logowania (HTTP ${res.status})`);
+                    return;
+                }
 
-    try {
-      const res = await fetch(`${API}/omdb/search?title=${encodeURIComponent(query)}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const json = await res.json();
-      if (json.data) {
-        // Wypełnij formularz danymi z OMDB
-        document.getElementById('addTitle').value = json.data.title || '';
-        document.getElementById('addYear').value = json.data.year || '';
-        document.getElementById('addDirector').value = json.data.director || '';
-        document.getElementById('addGenre').value = json.data.genre || '';
-        document.getElementById('addDescription').value = json.data.plot || '';
-        document.getElementById('addRating').value = json.data.imdbRating || '';
-        document.getElementById('addPoster').value = json.data.poster || '';
-        openAddModal();
-        toast('Znaleziono w OMDB — sprawdź dane ✓');
-      } else {
-        toast('Nie znaleziono w OMDB');
-      }
-    } catch {
-      toast('OMDB API niedostępne (dodaj film ręcznie)');
-      openAddModal();
-    }
-  }
+                setToken(json.data.token);
+                toast('Zalogowano ✓');
+                document.getElementById('modalLogin').classList.remove('open');
 
-  // ── Modal helpers ─────────────────────────────────
-  function openAddModal() {
-    document.getElementById('modalAdd').classList.add('open');
-  }
-  function closeAddModal() {
-    document.getElementById('modalAdd').classList.remove('open');
-    ['addTitle','addYear','addDirector','addGenre','addDescription','addRating','addPrice','addPoster']
-      .forEach(id => document.getElementById(id).value = '');
-  }
+                await fetchMe();
+            } catch (e) {
+                toast('Błąd połączenia: ' + e.message);
+            }
+        }
 
-  // ── Event listeners ───────────────────────────────
-  document.getElementById('fabBtn').addEventListener('click', openAddModal);
-  document.getElementById('btnCancelAdd').addEventListener('click', closeAddModal);
-  document.getElementById('btnSubmitAdd').addEventListener('click', submitAdd);
-  document.getElementById('btnSearch').addEventListener('click', searchOmdb);
-  document.getElementById('searchInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') searchOmdb();
-  });
+        async function register() {
+            const username = document.getElementById('regUsername').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value.trim();
 
-  document.getElementById('btnOpenLogin').addEventListener('click', () => {
-    document.getElementById('modalLogin').classList.add('open');
-  });
-  document.getElementById('btnCancelLogin').addEventListener('click', () => {
-    document.getElementById('modalLogin').classList.remove('open');
-  });
-  document.getElementById('btnSubmitLogin').addEventListener('click', () => {
-    toast('JWT logowanie — dostępne po Etapie 2');
-  });
+            if (!username || !email || !password) {
+                toast('Wypełnij wszystkie pola rejestracji');
+                return;
+            }
 
-  // Zamknij modal klikając tło
-  document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', e => {
-      if (e.target === overlay) overlay.classList.remove('open');
-    });
-  });
+            try {
+                const res = await fetch(`${API}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
 
-  // ── Init ──────────────────────────────────────────
-  fetchUsdRate();
-  loadMovies();
+                const json = await res.json();
+
+                if (!res.ok) {
+                    toast(json.message || `Błąd rejestracji (HTTP ${res.status})`);
+                    return;
+                }
+
+                setToken(json.data.token);
+                toast('Konto utworzone ✓');
+                document.getElementById('modalRegister').classList.remove('open');
+
+                await fetchMe();
+            } catch (e) {
+                toast('Błąd połączenia: ' + e.message);
+            }
+        }
+
+        // ── Fetch NBP rate ────────────────────────────────
+        async function fetchUsdRate() {
+            try {
+                const res = await fetch('https://api.nbp.pl/api/exchangerates/rates/A/USD?format=json');
+                if (!res.ok) return;
+                const data = await res.json();
+                usdRate = data.rates[0].mid;
+                document.getElementById('statUsdRate').textContent = usdRate.toFixed(4);
+            } catch {
+                document.getElementById('statUsdRate').textContent = 'N/A';
+            }
+        }
+
+        // ── Render movies ─────────────────────────────────
+        function renderMovies(movies) {
+            const grid = document.getElementById('moviesGrid');
+            grid.innerHTML = '';
+
+            movies.forEach(m => {
+                const card = document.createElement('div');
+                card.className = 'movie-card';
+
+                const priceText = (usdRate && m.priceUSD)
+                    ? `$${m.priceUSD.toFixed(2)} / ${(m.priceUSD * usdRate).toFixed(2)} PLN`
+                    : (m.priceUSD ? `$${m.priceUSD.toFixed(2)}` : '');
+
+                card.innerHTML = `
+                <div class="movie-poster">
+                  ${m.posterUrl
+                        ? `<img src="${m.posterUrl}" alt="${m.title}" onerror="this.parentElement.innerHTML='<div class=poster-placeholder>🎬</div>'" />`
+                        : '<div class="poster-placeholder">🎬</div>'}
+                </div>
+                <div class="movie-info">
+                  <div class="movie-title" title="${m.title}">${m.title}</div>
+                  <div class="genre-tag">${m.genre || ''}</div>
+                  <div class="movie-meta">
+                    <span class="movie-year">${m.year || ''}</span>
+                    <span class="rating-badge">★ ${m.rating || '—'}</span>
+                  </div>
+                  ${priceText ? `<div style="font-size:0.7rem;color:#555;font-family:sans-serif;margin-top:0.3rem">${priceText}</div>` : ''}
+                  <div style="margin-top:0.5rem;text-align:right">
+                    <button class="btn-delete" data-id="${m.id}" title="Usuń film">🗑 Usuń</button>
+                  </div>
+                </div>
+              `;
+                grid.appendChild(card);
+            });
+
+            // Karta "dodaj"
+            const addCard = document.createElement('div');
+            addCard.className = 'movie-card add-card';
+            addCard.innerHTML = `<div class="add-card-icon">+</div><div class="add-card-label">Dodaj film</div>`;
+            addCard.addEventListener('click', openAddModal);
+            grid.appendChild(addCard);
+
+            // Event listeners na delete
+            grid.querySelectorAll('.btn-delete').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    e.stopPropagation();
+                    deleteMovie(parseInt(btn.dataset.id));
+                });
+            });
+
+            updateStats(movies);
+        }
+
+        // ── Stats ─────────────────────────────────────────
+        function updateStats(movies) {
+            document.getElementById('statCount').textContent = movies.length;
+            const dirs = new Set(movies.map(m => m.director).filter(Boolean));
+            document.getElementById('statDirectors').textContent = dirs.size;
+            const rated = movies.filter(m => m.rating);
+            const avg = rated.length ? (rated.reduce((s, m) => s + m.rating, 0) / rated.length).toFixed(1) : '—';
+            document.getElementById('statAvgRating').textContent = avg;
+        }
+
+        // ── Load movies ───────────────────────────────────
+        async function loadMovies() {
+            clearError();
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const res = await fetch(`${API}/movies`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const json = await res.json();
+                renderMovies(json.data || []);
+            } catch (e) {
+                showError(`Nie można połączyć z API: ${e.message}. Upewnij się że backend działa.`);
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // ── Delete movie ──────────────────────────────────
+        async function deleteMovie(id) {
+            if (!confirm('Usunąć ten film?')) return;
+            try {
+                const res = await apiFetch(`${API}/movies/${id}`, { method: 'DELETE' });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                toast('Film usunięty ✓');
+                loadMovies();
+            } catch (e) {
+                toast('Błąd usuwania: ' + e.message);
+            }
+        }
+
+        // ── Add movie ─────────────────────────────────────
+        async function submitAdd() {
+            const title = document.getElementById('addTitle').value.trim();
+            if (!title) { toast('Tytuł jest wymagany!'); return; }
+
+            const movie = {
+                title,
+                year: parseInt(document.getElementById('addYear').value) || 0,
+                director: document.getElementById('addDirector').value.trim(),
+                genre: document.getElementById('addGenre').value.trim(),
+                description: document.getElementById('addDescription').value.trim(),
+                rating: parseFloat(document.getElementById('addRating').value) || 0,
+                priceUSD: parseFloat(document.getElementById('addPrice').value) || 0,
+                posterUrl: document.getElementById('addPoster').value.trim() || null,
+            };
+
+            try {
+                const res = await apiFetch(`${API}/movies`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(movie)
+                });
+                if (!res.ok) {
+                    const err = await res.json();
+                    toast('Błąd: ' + (err.message || res.status));
+                    return;
+                }
+                closeAddModal();
+                toast('Film dodany pomyślnie ✓');
+                loadMovies();
+            } catch (e) {
+                toast('Błąd połączenia: ' + e.message);
+            }
+        }
+
+        // ── OMDB Search ───────────────────────────────────
+        let lastOmdb = null;
+
+        function clearOmdbResult() {
+            lastOmdb = null;
+            document.getElementById('omdbResult').style.display = 'none';
+            document.getElementById('omdbPoster').innerHTML = '<div class="poster-placeholder">🎬</div>';
+            document.getElementById('omdbTitle').textContent = '—';
+            document.getElementById('omdbMeta').textContent = '';
+            document.getElementById('omdbPlot').textContent = '';
+            document.getElementById('btnImportOmdb').disabled = true;
+        }
+
+        function showOmdbResult(m) {
+            lastOmdb = m;
+
+            // OMDB zwraca pola: Title/Year/Director/Genre/Plot/Poster/imdbRating
+            const title = m?.Title || '—';
+            const year = m?.Year || '';
+            const director = m?.Director || '';
+            const genre = m?.Genre || '';
+            const rating = m?.imdbRating || '';
+
+            document.getElementById('omdbTitle').textContent = year ? `${title} (${year})` : title;
+
+            document.getElementById('omdbMeta').innerHTML = [
+                director ? `Reżyser: <strong style="color:#ddd">${director}</strong>` : null,
+                genre ? `Gatunek: <strong style="color:#ddd">${genre}</strong>` : null,
+                rating ? `IMDb: <strong style="color:#f4c430">${rating}</strong>` : null
+            ].filter(Boolean).join(' • ');
+
+            document.getElementById('omdbPlot').textContent = m?.Plot || '';
+
+            const poster = m?.Poster;
+            if (poster && poster !== 'N/A') {
+                document.getElementById('omdbPoster').innerHTML =
+                    `<img src="${poster}" alt="${title}" onerror="this.parentElement.innerHTML='<div class=poster-placeholder>🎬</div>'" />`;
+            } else {
+                document.getElementById('omdbPoster').innerHTML = '<div class="poster-placeholder">🎬</div>';
+            }
+
+            document.getElementById('omdbResult').style.display = 'block';
+            document.getElementById('btnImportOmdb').disabled = false;
+
+            // przewijamy do wyniku
+            document.getElementById('omdbResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        async function searchOmdb() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) { toast('Wpisz tytuł do szukania'); return; }
+
+            try {
+                const res = await fetch(`${API}/omdb/search?title=${encodeURIComponent(query)}`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+                const json = await res.json();
+
+                if (json.data) {
+                    showOmdbResult(json.data);
+                    toast('Znaleziono w OMDB ✓');
+                } else {
+                    clearOmdbResult();
+                    toast('Nie znaleziono w OMDB');
+                }
+            } catch (e) {
+                clearOmdbResult();
+                toast('OMDB API niedostępne');
+            }
+        }
+
+        async function importOmdbToDb() {
+            if (!lastOmdb?.Title) {
+                toast('Najpierw wyszukaj film w OMDB');
+                return;
+            }
+
+            try {
+                const res = await apiFetch(`${API}/omdb/import?title=${encodeURIComponent(lastOmdb.Title)}`, {
+                    method: 'POST'
+                });
+
+                if (!res.ok) {
+                    // Jak masz [Authorize] na imporcie, tu poleci 401 dopóki nie zrobimy logowania w UI
+                    toast(`Nie można zaimportować (HTTP ${res.status}). Zaloguj się jeśli wymagane.`);
+                    return;
+                }
+
+                toast('Zaimportowano film do bazy ✓');
+                clearOmdbResult();
+                document.getElementById('searchInput').value = '';
+                loadMovies();
+            } catch (e) {
+                toast('Błąd importu: ' + e.message);
+            }
+        }
+
+
+        // ── Modal helpers ─────────────────────────────────
+        function openAddModal() {
+            document.getElementById('modalAdd').classList.add('open');
+        }
+        function closeAddModal() {
+            document.getElementById('modalAdd').classList.remove('open');
+            ['addTitle', 'addYear', 'addDirector', 'addGenre', 'addDescription', 'addRating', 'addPrice', 'addPoster']
+                .forEach(id => document.getElementById(id).value = '');
+        }
+
+        // ── Event listeners ───────────────────────────────
+        document.getElementById('fabBtn').addEventListener('click', openAddModal);
+        document.getElementById('btnCancelAdd').addEventListener('click', closeAddModal);
+        document.getElementById('btnSubmitAdd').addEventListener('click', submitAdd);
+        document.getElementById('btnSearch').addEventListener('click', searchOmdb);
+        document.getElementById('btnClearOmdb').addEventListener('click', clearOmdbResult);
+        document.getElementById('btnImportOmdb').addEventListener('click', importOmdbToDb);
+        document.getElementById('searchInput').addEventListener('keydown', e => {
+            if (e.key === 'Enter') searchOmdb();
+        });
+
+        document.getElementById('btnOpenLogin').addEventListener('click', () => {
+            document.getElementById('modalLogin').classList.add('open');
+        });
+        document.getElementById('btnCancelLogin').addEventListener('click', () => {
+            document.getElementById('modalLogin').classList.remove('open');
+        });
+        document.getElementById('btnSubmitLogin').addEventListener('click', login);
+
+        document.getElementById('btnOpenRegister').addEventListener('click', () => {
+            document.getElementById('modalRegister').classList.add('open');
+        });
+
+        document.getElementById('btnCancelRegister').addEventListener('click', () => {
+            document.getElementById('modalRegister').classList.remove('open');
+        });
+
+        document.getElementById('btnSubmitRegister').addEventListener('click', register);
+
+        document.getElementById('linkOpenLogin').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('modalRegister').classList.remove('open');
+            document.getElementById('modalLogin').classList.add('open');
+        });
+
+
+        // Zamknij modal klikając tło
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', e => {
+                if (e.target === overlay) overlay.classList.remove('open');
+            });
+        });
+
+        // ── Init ──────────────────────────────────────────
+        clearOmdbResult();
+        fetchUsdRate();
+        loadMovies();
+        fetchMe();
     </script>
 </body>
 </html>

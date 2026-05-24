@@ -28,7 +28,6 @@ E:\Studia_pliki\TemuFlix\TemuFlix\TemuFlix\obj\Debug\net10.0\rjimswa.dswa.cache.
 E:\Studia_pliki\TemuFlix\TemuFlix\TemuFlix\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 E:\Studia_pliki\TemuFlix\TemuFlix\TemuFlix\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
 E:\Studia_pliki\TemuFlix\TemuFlix\TemuFlix\obj\Debug\net10.0\scopedcss\bundle\TemuFlix.styles.css
-E:\Studia_pliki\TemuFlix\TemuFlix\TemuFlix\obj\Debug\net10.0\compressed\0k39anopm9-{0}-oc6gsycs1s-oc6gsycs1s.gz
 E:\Studia_pliki\TemuFlix\TemuFlix\TemuFlix\obj\Debug\net10.0\staticwebassets.build.json
 E:\Studia_pliki\TemuFlix\TemuFlix\TemuFlix\obj\Debug\net10.0\staticwebassets.build.json.cache
 E:\Studia_pliki\TemuFlix\TemuFlix\TemuFlix\obj\Debug\net10.0\staticwebassets.development.json
@@ -50,3 +49,4 @@ E:\Studia_pliki\TemuFlix\TemuFlix\TemuFlix\bin\Debug\net10.0\Microsoft.IdentityM
 E:\Studia_pliki\TemuFlix\TemuFlix\TemuFlix\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 E:\Studia_pliki\TemuFlix\TemuFlix\TemuFlix\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
 E:\Studia_pliki\TemuFlix\TemuFlix\TemuFlix\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
+E:\Studia_pliki\TemuFlix\TemuFlix\TemuFlix\obj\Debug\net10.0\compressed\0k39anopm9-{0}-kquvlikuq7-kquvlikuq7.gz
