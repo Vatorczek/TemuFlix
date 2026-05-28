@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="TemuFlix.Tests/TemuFlix.Tests.csproj" Id="1c28e0a1-5b4c-449c-bc7d-a60b0b9a6556" />
   <Project Path="TemuFlix/TemuFlix.csproj" />
 </Solution>

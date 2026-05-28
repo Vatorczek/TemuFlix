@@ -6,10 +6,10 @@ using System.Text;
 using TemuFlix.Data;
 using TemuFlix.Services;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
 
 // Swagger z obsługą JWT
 builder.Services.AddSwaggerGen(c =>
@@ -32,7 +32,7 @@ builder.Services.AddSwaggerGen(c =>
 
 // Baza danych
 builder.Services.AddDbContext<AppDbContext>(opt =>
-    opt.UseInMemoryDatabase("TemuFlixDb"));
+    opt.UseSqlite("Data Source=temuflix.db"));
 
 // JWT
 var jwtKey = builder.Configuration["Jwt:Key"]!;
@@ -53,7 +53,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
-// Serwisy
+// Serwisy 
 builder.Services.AddScoped<JwtService>();
 
 builder.Services.AddHttpClient<OmdbService>(client =>
