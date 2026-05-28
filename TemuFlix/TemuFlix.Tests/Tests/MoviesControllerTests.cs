@@ -111,7 +111,7 @@ namespace TemuFlix.Tests.Tests
 
             // Assert
             var ok = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(0, db.Movies.Count());
+            Assert.Null(await db.Movies.FindAsync(200));
         }
 
         [Fact]

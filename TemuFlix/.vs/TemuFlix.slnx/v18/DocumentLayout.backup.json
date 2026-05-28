@@ -3,44 +3,16 @@
   "WorkspaceRootPath": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|e:\\studia_pliki\\temuflix\\temuflix\\temuflix\\services\\omdbservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|solutionrelative:temuflix\\services\\omdbservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|e:\\studia_pliki\\temuflix\\temuflix\\temuflix\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|solutionrelative:temuflix\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|e:\\studia_pliki\\temuflix\\temuflix\\temuflix\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|solutionrelative:temuflix\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C28E0A1-5B4C-449C-BC7D-A60B0B9A6556}|TemuFlix.Tests\\TemuFlix.Tests.csproj|e:\\studia_pliki\\temuflix\\temuflix\\temuflix.tests\\tests\\authcontrollertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C28E0A1-5B4C-449C-BC7D-A60B0B9A6556}|TemuFlix.Tests\\TemuFlix.Tests.csproj|solutionrelative:temuflix.tests\\tests\\authcontrollertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1C28E0A1-5B4C-449C-BC7D-A60B0B9A6556}|TemuFlix.Tests\\TemuFlix.Tests.csproj|e:\\studia_pliki\\temuflix\\temuflix\\temuflix.tests\\tests\\moviescontrollertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C28E0A1-5B4C-449C-BC7D-A60B0B9A6556}|TemuFlix.Tests\\TemuFlix.Tests.csproj|solutionrelative:temuflix.tests\\tests\\moviescontrollertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C28E0A1-5B4C-449C-BC7D-A60B0B9A6556}|TemuFlix.Tests\\TemuFlix.Tests.csproj|e:\\studia_pliki\\temuflix\\temuflix\\temuflix.tests\\temuflix.tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{1C28E0A1-5B4C-449C-BC7D-A60B0B9A6556}|TemuFlix.Tests\\TemuFlix.Tests.csproj|solutionrelative:temuflix.tests\\temuflix.tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C28E0A1-5B4C-449C-BC7D-A60B0B9A6556}|TemuFlix.Tests\\TemuFlix.Tests.csproj|e:\\studia_pliki\\temuflix\\temuflix\\temuflix.tests\\helpers\\testdbhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C28E0A1-5B4C-449C-BC7D-A60B0B9A6556}|TemuFlix.Tests\\TemuFlix.Tests.csproj|solutionrelative:temuflix.tests\\helpers\\testdbhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|e:\\studia_pliki\\temuflix\\temuflix\\temuflix\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|solutionrelative:temuflix\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|e:\\studia_pliki\\temuflix\\temuflix\\temuflix\\models\\authresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|solutionrelative:temuflix\\models\\authresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|e:\\studia_pliki\\temuflix\\temuflix\\temuflix\\controllers\\moviescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|solutionrelative:temuflix\\controllers\\moviescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|e:\\studia_pliki\\temuflix\\temuflix\\temuflix\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EC863F86-FB51-97B9-B811-8FF53F78426B}|TemuFlix\\TemuFlix.csproj|solutionrelative:temuflix\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,115 +22,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "MoviesControllerTests.cs",
               "DocumentMoniker": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix.Tests\\Tests\\MoviesControllerTests.cs",
               "RelativeDocumentMoniker": "TemuFlix.Tests\\Tests\\MoviesControllerTests.cs",
               "ToolTip": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix.Tests\\Tests\\MoviesControllerTests.cs",
               "RelativeToolTip": "TemuFlix.Tests\\Tests\\MoviesControllerTests.cs",
-              "ViewState": "AgIAAHUAAAAAAAAAAAA3wIsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAswHMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-28T19:40:56.24Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "TestDbHelper.cs",
-              "DocumentMoniker": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix.Tests\\Helpers\\TestDbHelper.cs",
-              "RelativeDocumentMoniker": "TemuFlix.Tests\\Helpers\\TestDbHelper.cs",
-              "ToolTip": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix.Tests\\Helpers\\TestDbHelper.cs",
-              "RelativeToolTip": "TemuFlix.Tests\\Helpers\\TestDbHelper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-28T19:40:27.901Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "TemuFlix.Tests",
-              "DocumentMoniker": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix.Tests\\TemuFlix.Tests.csproj",
-              "RelativeDocumentMoniker": "TemuFlix.Tests\\TemuFlix.Tests.csproj",
-              "ToolTip": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix.Tests\\TemuFlix.Tests.csproj",
-              "RelativeToolTip": "TemuFlix.Tests\\TemuFlix.Tests.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-05-28T19:40:12.282Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix\\appsettings.json",
-              "RelativeDocumentMoniker": "TemuFlix\\appsettings.json",
-              "ToolTip": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix\\appsettings.json",
-              "RelativeToolTip": "TemuFlix\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-05-28T19:28:05.781Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "OmdbService.cs",
-              "DocumentMoniker": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix\\Services\\OmdbService.cs",
-              "RelativeDocumentMoniker": "TemuFlix\\Services\\OmdbService.cs",
-              "ToolTip": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix\\Services\\OmdbService.cs",
-              "RelativeToolTip": "TemuFlix\\Services\\OmdbService.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAAwEMAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-28T19:16:38.269Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "AuthResponse.cs",
-              "DocumentMoniker": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix\\Models\\AuthResponse.cs",
-              "RelativeDocumentMoniker": "TemuFlix\\Models\\AuthResponse.cs",
-              "ToolTip": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix\\Models\\AuthResponse.cs",
-              "RelativeToolTip": "TemuFlix\\Models\\AuthResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-24T10:08:43.451Z",
+              "WhenOpened": "2026-05-28T20:46:25.38Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "index.html",
-              "DocumentMoniker": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix\\wwwroot\\index.html",
-              "RelativeDocumentMoniker": "TemuFlix\\wwwroot\\index.html",
-              "ToolTip": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix\\wwwroot\\index.html",
-              "RelativeToolTip": "TemuFlix\\wwwroot\\index.html",
-              "ViewState": "AgIAAOYEAAAAAAAAAAAYwO8EAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-05-24T09:53:54.883Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AuthControllerTests.cs",
-              "DocumentMoniker": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix.Tests\\Tests\\AuthControllerTests.cs",
-              "RelativeDocumentMoniker": "TemuFlix.Tests\\Tests\\AuthControllerTests.cs",
-              "ToolTip": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix.Tests\\Tests\\AuthControllerTests.cs",
-              "RelativeToolTip": "TemuFlix.Tests\\Tests\\AuthControllerTests.cs",
-              "ViewState": "AgIAAIIAAAAAAAAAAAAkwJQAAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-28T19:41:26.43Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix\\Program.cs",
               "RelativeDocumentMoniker": "TemuFlix\\Program.cs",
@@ -171,15 +52,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "MoviesController.cs",
-              "DocumentMoniker": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix\\Controllers\\MoviesController.cs",
-              "RelativeDocumentMoniker": "TemuFlix\\Controllers\\MoviesController.cs",
-              "ToolTip": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix\\Controllers\\MoviesController.cs",
-              "RelativeToolTip": "TemuFlix\\Controllers\\MoviesController.cs",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAcwFAAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-24T07:45:43.861Z"
+              "DocumentIndex": 2,
+              "Title": "index.html",
+              "DocumentMoniker": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix\\wwwroot\\index.html",
+              "RelativeDocumentMoniker": "TemuFlix\\wwwroot\\index.html",
+              "ToolTip": "E:\\Studia_pliki\\TemuFlix\\TemuFlix\\TemuFlix\\wwwroot\\index.html",
+              "RelativeToolTip": "TemuFlix\\wwwroot\\index.html",
+              "ViewState": "AgIAABsEAAAAAAAAAAAhwC4EAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-05-24T09:53:54.883Z",
+              "EditorCaption": ""
             }
           ]
         }

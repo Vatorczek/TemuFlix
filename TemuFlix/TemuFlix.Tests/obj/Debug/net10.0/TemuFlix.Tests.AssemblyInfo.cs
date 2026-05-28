@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TemuFlix.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+559a9aaf5141fb989b36b0be9b19db36a7aebefb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f912ead4686bf2d8474921da7590e87f0a3cee5e")]
 [assembly: System.Reflection.AssemblyProductAttribute("TemuFlix.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TemuFlix.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

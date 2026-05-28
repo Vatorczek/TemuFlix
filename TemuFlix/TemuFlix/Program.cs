@@ -10,7 +10,6 @@ using TemuFlix.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
 
 // Swagger z obsługą JWT
 builder.Services.AddSwaggerGen(c =>

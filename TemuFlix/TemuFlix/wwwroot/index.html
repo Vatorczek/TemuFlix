@@ -996,8 +996,12 @@
 
         function getToken() { return sessionStorage.getItem('tf_token'); }
         function saveAuth(data) {
-            sessionStorage.setItem('tf_token', data.token);
-            currentUser = { username: data.username, email: data.email, role: data.role };
+            sessionStorage.setItem('tf_token', data.Token || data.token);
+            currentUser = {
+                username: data.Username || data.username,
+                email: data.Email || data.email,
+                role: data.Role || data.role
+            };
             sessionStorage.setItem('tf_user', JSON.stringify(currentUser));
         }
         function clearAuth() {
@@ -1061,7 +1065,8 @@
                 });
                 const json = await res.json();
                 if (!res.ok) { errEl.textContent = json.message || 'Błąd logowania'; return; }
-                saveAuth(json.data);
+                const data = json.Data || json.data;
+                saveAuth(data);
                 updateNavForUser();
                 toast(`Witaj, ${json.data.username}! 👋`);
                 showPage('home');
