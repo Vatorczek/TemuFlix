@@ -18,7 +18,6 @@
             min-height: 100vh;
         }
 
-        /* ── NAV ── */
         nav {
             background: #0d0d14;
             border-bottom: 1px solid #1e1e2e;
@@ -37,6 +36,7 @@
             font-weight: 700;
             letter-spacing: -0.5px;
             color: #fff;
+            cursor: pointer;
         }
 
             .logo span {
@@ -45,14 +45,14 @@
 
         .nav-links {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             align-items: center;
         }
 
             .nav-links a {
                 color: #888;
                 text-decoration: none;
-                font-size: 0.9rem;
+                font-size: 0.85rem;
                 font-family: sans-serif;
                 transition: color 0.2s;
             }
@@ -61,19 +61,58 @@
                     color: #fff;
                 }
 
-        #btnOpenLogin {
-            background: #e63946;
-            color: #fff;
-            border: none;
+        .nav-btn {
+            background: transparent;
+            color: #888;
+            border: 1px solid #2a2a3a;
             padding: 0.4rem 1rem;
             border-radius: 6px;
             font-size: 0.85rem;
             font-family: sans-serif;
             cursor: pointer;
-            font-weight: 600;
+            transition: all 0.2s;
         }
 
-        /* ── HERO ── */
+            .nav-btn:hover {
+                color: #fff;
+                border-color: #555;
+            }
+
+            .nav-btn.primary {
+                background: #e63946;
+                color: #fff;
+                border-color: #e63946;
+            }
+
+                .nav-btn.primary:hover {
+                    background: #c1121f;
+                }
+
+        #navUser {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        #navUsername {
+            font-size: 0.85rem;
+            font-family: sans-serif;
+            color: #e8e8f0;
+            cursor: pointer;
+        }
+
+            #navUsername:hover {
+                color: #e63946;
+            }
+
+        .page {
+            display: none;
+        }
+
+            .page.active {
+                display: block;
+            }
+
         .hero {
             padding: 3rem 2rem 1.5rem;
             max-width: 1100px;
@@ -98,7 +137,6 @@
                 font-size: 0.9rem;
             }
 
-        /* ── SEARCH ── */
         .search-bar {
             max-width: 1100px;
             margin: 1.5rem auto;
@@ -140,7 +178,97 @@
                     background: #c1121f;
                 }
 
-        /* ── STATS ── */
+                .search-bar button.secondary {
+                    background: #1a1a28;
+                    border: 1px solid #2a2a3a;
+                    color: #aaa;
+                }
+
+                    .search-bar button.secondary:hover {
+                        color: #fff;
+                        border-color: #555;
+                    }
+
+        #omdbResults {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem 1rem;
+            display: none;
+        }
+
+            #omdbResults h3 {
+                font-size: 0.75rem;
+                color: #888;
+                font-family: sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                margin-bottom: 0.75rem;
+            }
+
+        .omdb-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .omdb-item {
+            background: #13131a;
+            border: 1px solid #1e1e2e;
+            border-radius: 6px;
+            padding: 0.5rem 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            font-family: sans-serif;
+            font-size: 0.85rem;
+            max-width: 280px;
+        }
+
+            .omdb-item:hover {
+                border-color: #e63946;
+            }
+
+            .omdb-item img {
+                width: 36px;
+                height: 52px;
+                object-fit: cover;
+                border-radius: 3px;
+                background: #1a1a24;
+                flex-shrink: 0;
+            }
+
+        .omdb-item-info {
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .omdb-item-title {
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .omdb-item-year {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 0.1rem;
+        }
+
+        .omdb-import-btn {
+            background: #e63946;
+            color: #fff;
+            border: none;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            flex-shrink: 0;
+            font-family: sans-serif;
+        }
+
         .stats {
             max-width: 1100px;
             margin: 0 auto;
@@ -174,7 +302,6 @@
             margin-top: 0.25rem;
         }
 
-        /* ── GRID ── */
         .section {
             max-width: 1100px;
             margin: 0 auto;
@@ -202,7 +329,6 @@
             border: 1px solid #1e1e2e;
             border-radius: 8px;
             overflow: hidden;
-            cursor: pointer;
             transition: transform 0.2s, border-color 0.2s;
         }
 
@@ -216,7 +342,6 @@
             aspect-ratio: 2/3;
             background: #1a1a24;
             overflow: hidden;
-            position: relative;
         }
 
             .movie-poster img {
@@ -278,6 +403,35 @@
             font-family: sans-serif;
         }
 
+        .price-tag {
+            font-size: 0.7rem;
+            color: #555;
+            font-family: sans-serif;
+            margin-top: 0.3rem;
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 0.5rem;
+        }
+
+        .btn-delete {
+            background: transparent;
+            border: none;
+            color: #444;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-family: sans-serif;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            transition: color 0.2s;
+        }
+
+            .btn-delete:hover {
+                color: #e63946;
+            }
+
         .add-card {
             border: 1px dashed #2a2a3a !important;
             display: flex;
@@ -287,6 +441,9 @@
             flex-direction: column;
             gap: 0.5rem;
             cursor: pointer;
+            border-radius: 8px;
+            background: transparent;
+            transition: border-color 0.2s;
         }
 
             .add-card:hover {
@@ -304,7 +461,233 @@
             font-family: sans-serif;
         }
 
-        /* ── FAB ── */
+        .lock-notice {
+            background: #1a0f0f;
+            border: 1px solid #3a1a1a;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-family: sans-serif;
+            font-size: 0.85rem;
+            color: #888;
+            max-width: 1100px;
+            margin: 0 auto 1.5rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+            .lock-notice a {
+                color: #e63946;
+                cursor: pointer;
+                text-decoration: none;
+            }
+
+                .lock-notice a:hover {
+                    text-decoration: underline;
+                }
+
+        .profile-page {
+            max-width: 600px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .profile-card {
+            background: #13131a;
+            border: 1px solid #1e1e2e;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .profile-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: #e63946;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            font-family: sans-serif;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.25rem;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-email {
+            font-size: 0.9rem;
+            color: #666;
+            font-family: sans-serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-role {
+            display: inline-block;
+            background: #1a1a28;
+            color: #e63946;
+            font-size: 0.75rem;
+            font-family: sans-serif;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            border: 1px solid #2a2a3a;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-stat {
+            background: #0d0d14;
+            border: 1px solid #1e1e2e;
+            border-radius: 8px;
+            padding: 0.75rem;
+            text-align: center;
+        }
+
+        .profile-stat-num {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #e63946;
+            font-family: sans-serif;
+        }
+
+        .profile-stat-label {
+            font-size: 0.7rem;
+            color: #555;
+            font-family: sans-serif;
+            margin-top: 0.2rem;
+        }
+
+        .btn-logout {
+            background: transparent;
+            border: 1px solid #3a1a1a;
+            color: #e63946;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: sans-serif;
+            transition: all 0.2s;
+        }
+
+            .btn-logout:hover {
+                background: #1a0a0a;
+            }
+
+        .auth-page {
+            max-width: 420px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .auth-card {
+            background: #13131a;
+            border: 1px solid #1e1e2e;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #1e1e2e;
+        }
+
+        .auth-tab {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #666;
+            padding: 0.75rem;
+            font-size: 0.9rem;
+            font-family: sans-serif;
+            cursor: pointer;
+            transition: color 0.2s;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+        }
+
+            .auth-tab.active {
+                color: #e63946;
+                border-bottom-color: #e63946;
+            }
+
+        .auth-form {
+            display: none;
+        }
+
+            .auth-form.active {
+                display: block;
+            }
+
+            .auth-form label {
+                display: block;
+                font-size: 0.8rem;
+                color: #888;
+                font-family: sans-serif;
+                margin-bottom: 0.35rem;
+                margin-top: 1rem;
+            }
+
+                .auth-form label:first-child {
+                    margin-top: 0;
+                }
+
+            .auth-form input {
+                width: 100%;
+                background: #0d0d14;
+                border: 1px solid #1e1e2e;
+                color: #e8e8f0;
+                padding: 0.6rem 0.75rem;
+                border-radius: 6px;
+                font-size: 0.9rem;
+                font-family: sans-serif;
+                outline: none;
+            }
+
+                .auth-form input:focus {
+                    border-color: #e63946;
+                }
+
+        .btn-auth {
+            width: 100%;
+            background: #e63946;
+            color: #fff;
+            border: none;
+            padding: 0.7rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: sans-serif;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: background 0.2s;
+        }
+
+            .btn-auth:hover {
+                background: #c1121f;
+            }
+
+        .auth-error {
+            color: #e63946;
+            font-size: 0.8rem;
+            font-family: sans-serif;
+            margin-top: 0.75rem;
+            min-height: 1.2rem;
+        }
+
         .fab {
             position: fixed;
             bottom: 2rem;
@@ -319,6 +702,7 @@
             cursor: pointer;
             box-shadow: 0 4px 20px rgba(230,57,70,0.4);
             transition: background 0.2s, transform 0.1s;
+            z-index: 50;
         }
 
             .fab:hover {
@@ -326,7 +710,6 @@
                 transform: scale(1.05);
             }
 
-        /* ── MODAL ── */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -349,6 +732,8 @@
             width: 100%;
             max-width: 440px;
             margin: 1rem;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
             .modal h2 {
@@ -367,7 +752,7 @@
                 margin-top: 1rem;
             }
 
-            .modal input, .modal textarea, .modal select {
+            .modal input, .modal textarea {
                 width: 100%;
                 background: #0d0d14;
                 border: 1px solid #1e1e2e;
@@ -427,7 +812,6 @@
                 background: #c1121f;
             }
 
-        /* ── TOAST ── */
         .toast {
             position: fixed;
             bottom: 5rem;
@@ -450,7 +834,6 @@
                 opacity: 1;
             }
 
-        /* ── LOADING ── */
         #loading {
             max-width: 1100px;
             margin: 2rem auto;
@@ -462,188 +845,202 @@
 
         #errorMsg {
             max-width: 1100px;
-            margin: 1rem auto;
+            margin: 0.5rem auto;
             padding: 0 2rem;
             font-family: sans-serif;
             font-size: 0.85rem;
             color: #e63946;
         }
-
-        /* delete btn inside card */
-        .btn-delete {
-            background: transparent;
-            border: none;
-            color: #555;
-            cursor: pointer;
-            font-size: 0.75rem;
-            font-family: sans-serif;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            transition: color 0.2s;
-        }
-
-            .btn-delete:hover {
-                color: #e63946;
-            }
     </style>
 </head>
 <body>
 
-    <!-- NAV -->
     <nav>
-        <div class="logo">Temu<span>Flix</span></div>
+        <div class="logo" onclick="showPage('home')">Temu<span>Flix</span></div>
         <div class="nav-links">
-            <a href="#">Filmy</a>
+            <a href="#" onclick="showPage('home'); return false;">Filmy</a>
             <a href="/swagger" target="_blank">Swagger API</a>
-            <button id="btnOpenLogin" type="button">Zaloguj się</button>
-            <button id="btnOpenRegister" class="btn-secondary" type="button" style="border-radius:6px; padding:0.4rem 1rem;">
-                Rejestracja
-            </button>
+            <div id="navGuest">
+                <button class="nav-btn primary" onclick="showPage('auth')">Zaloguj się</button>
+            </div>
+            <div id="navUser" style="display:none">
+                <span id="navUsername" onclick="showPage('profile')">👤 <span id="navUsernameText"></span></span>
+                <button class="nav-btn" onclick="logout()">Wyloguj</button>
+            </div>
         </div>
     </nav>
 
-    <!-- HERO -->
-    <div class="hero">
-        <h1>Odkryj swój następny <em>ulubiony film</em></h1>
-        <p>Baza filmów z cenami w PLN i USD • Wyszukuj przez OMDB • Kursy walut NBP</p>
+    <!-- HOME -->
+    <div id="pageHome" class="page active">
+        <div class="hero">
+            <h1>Odkryj swój następny <em>ulubiony film</em></h1>
+            <p>Baza filmów z cenami w PLN i USD • Wyszukuj przez OMDB • Kursy walut NBP</p>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Szukaj w OMDB: np. Inception, Batman..." />
+            <button id="btnSearch">🔍 Szukaj OMDB</button>
+            <button class="secondary" id="btnClearSearch" style="display:none">✕ Wyczyść</button>
+        </div>
+
+        <div id="omdbResults">
+            <h3 id="omdbResultsTitle">Wyniki OMDB</h3>
+            <div class="omdb-list" id="omdbList"></div>
+        </div>
+
+        <div id="loading" style="display:none">Ładowanie filmów...</div>
+        <div id="errorMsg"></div>
+
+        <div id="lockNotice" class="lock-notice" style="display:none">
+            🔒 Dodawanie i usuwanie filmów wymaga konta.
+            <a onclick="showPage('auth')">Zaloguj się</a> lub
+            <a onclick="showPage('auth'); switchAuthTab('register')">Zarejestruj się</a>
+        </div>
+
+        <div class="stats">
+            <div class="stat"><div class="stat-num" id="statCount">—</div><div class="stat-label">Filmy</div></div>
+            <div class="stat"><div class="stat-num" id="statDirectors">—</div><div class="stat-label">Reżyserzy</div></div>
+            <div class="stat"><div class="stat-num" id="statAvgRating">—</div><div class="stat-label">Śr. ocena</div></div>
+            <div class="stat"><div class="stat-num" id="statUsdRate">—</div><div class="stat-label">USD/PLN (NBP)</div></div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Wszystkie filmy</div>
+            <div class="movies-grid" id="moviesGrid"></div>
+        </div>
     </div>
 
-    <!-- SEARCH -->
-    <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Szukaj w OMDB: np. Inception, Matrix..." />
-        <button id="btnSearch" type="button">🔍 Szukaj OMDB</button>
-    </div>
-
-    <!-- OMDB RESULT (wariant B: pokazujemy wynik na stronie) -->
-    <div class="section" id="omdbResult" style="display:none; padding-top: 0;">
-        <div class="section-title">Wynik z OMDB</div>
-
-        <div class="movie-card" style="display:grid; grid-template-columns:180px 1fr; gap:1rem; padding:1rem;">
-            <div class="movie-poster" id="omdbPoster" style="border-radius:8px; overflow:hidden;">
-                <div class="poster-placeholder">🎬</div>
-            </div>
-
-            <div>
-                <div class="movie-title" id="omdbTitle" style="font-size:1.1rem; white-space:normal;">—</div>
-
-                <div id="omdbMeta"
-                     style="margin-top:0.35rem; color:#888; font-family:sans-serif; font-size:0.8rem;">
+    <!-- AUTH -->
+    <div id="pageAuth" class="page">
+        <div class="auth-page">
+            <div class="auth-card">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Zaloguj się</button>
+                    <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Zarejestruj się</button>
                 </div>
-
-                <div id="omdbPlot"
-                     style="margin-top:0.75rem; color:#bbb; font-family:sans-serif; font-size:0.9rem; line-height:1.35;">
+                <div class="auth-form active" id="formLogin">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" placeholder="user@example.com" />
+                    <label>Hasło</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter') submitLogin()" />
+                    <button class="btn-auth" onclick="submitLogin()">Zaloguj się</button>
+                    <div class="auth-error" id="loginError"></div>
                 </div>
-
-                <div style="margin-top:1rem; display:flex; gap:0.75rem; justify-content:flex-end;">
-                    <button class="btn-cancel" id="btnClearOmdb" type="button">Wyczyść</button>
-                    <button class="btn-submit" id="btnImportOmdb" type="button" disabled>Importuj do mojej bazy</button>
+                <div class="auth-form" id="formRegister">
+                    <label>Nazwa użytkownika</label>
+                    <input type="text" id="regUsername" placeholder="np. FilmFan2025" />
+                    <label>Email</label>
+                    <input type="email" id="regEmail" placeholder="user@example.com" />
+                    <label>Hasło (min. 6 znaków)</label>
+                    <input type="password" id="regPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter') submitRegister()" />
+                    <button class="btn-auth" onclick="submitRegister()">Zarejestruj się</button>
+                    <div class="auth-error" id="registerError"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- LOADING / ERROR -->
-    <div id="loading" style="display:none">Ładowanie filmów...</div>
-    <div id="errorMsg"></div>
-
-    <!-- STATS -->
-    <div class="stats">
-        <div class="stat"><div class="stat-num" id="statCount">—</div><div class="stat-label">Filmy</div></div>
-        <div class="stat"><div class="stat-num" id="statDirectors">—</div><div class="stat-label">Reżyserzy</div></div>
-        <div class="stat"><div class="stat-num" id="statAvgRating">—</div><div class="stat-label">Śr. ocena</div></div>
-        <div class="stat"><div class="stat-num" id="statUsdRate">—</div><div class="stat-label">USD/PLN (NBP)</div></div>
-    </div>
-
-    <!-- GRID -->
-    <div class="section">
-        <div class="section-title">Wszystkie filmy</div>
-        <div class="movies-grid" id="moviesGrid">
-            <!-- wypełniane przez JS -->
+    <!-- PROFILE -->
+    <div id="pageProfile" class="page">
+        <div class="profile-page">
+            <div class="profile-card">
+                <div class="profile-avatar" id="profileAvatar">?</div>
+                <div class="profile-name" id="profileName">—</div>
+                <div class="profile-email" id="profileEmail">—</div>
+                <div class="profile-role" id="profileRole">User</div>
+                <div class="profile-stats">
+                    <div class="profile-stat"><div class="profile-stat-num" id="profileMovieCount">—</div><div class="profile-stat-label">Filmy w bazie</div></div>
+                    <div class="profile-stat"><div class="profile-stat-num" id="profileUsdRate">—</div><div class="profile-stat-label">USD/PLN</div></div>
+                    <div class="profile-stat"><div class="profile-stat-num" id="profileAvgRating">—</div><div class="profile-stat-label">Śr. ocena</div></div>
+                </div>
+                <button class="btn-logout" onclick="logout()">Wyloguj się</button>
+            </div>
         </div>
     </div>
 
-    <!-- FAB -->
-    <button class="fab" id="fabBtn" title="Dodaj film">+</button>
-
-    <!-- TOAST -->
+    <button class="fab" id="fabBtn" onclick="openAddModal()" title="Dodaj film">+</button>
     <div class="toast" id="toast"></div>
 
-    <!-- MODAL: Dodaj film -->
+    <!-- MODAL dodaj film -->
     <div class="modal-overlay" id="modalAdd">
         <div class="modal">
             <h2>Dodaj nowy film</h2>
             <label>Tytuł *</label>
             <input type="text" id="addTitle" placeholder="np. The Dark Knight" />
             <label>Rok</label>
-            <input type="number" id="addYear" placeholder="np. 2008" min="1888" max="2030" />
+            <input type="number" id="addYear" placeholder="np. 2008" />
             <label>Reżyser</label>
-            <input type="text" id="addDirector" placeholder="np. Christopher Nolan" />
+            <input type="text" id="addDirector" />
             <label>Gatunek</label>
             <input type="text" id="addGenre" placeholder="np. Action, Sci-Fi" />
             <label>Opis</label>
             <textarea id="addDescription" placeholder="Krótki opis fabuły..."></textarea>
             <label>Ocena (0–10)</label>
-            <input type="number" id="addRating" placeholder="np. 9.0" min="0" max="10" step="0.1" />
+            <input type="number" id="addRating" step="0.1" min="0" max="10" />
             <label>Cena (USD)</label>
-            <input type="number" id="addPrice" placeholder="np. 9.99" min="0" step="0.01" />
+            <input type="number" id="addPrice" step="0.01" min="0" />
             <label>URL plakatu (opcjonalnie)</label>
             <input type="text" id="addPoster" placeholder="https://..." />
             <div class="modal-btns">
-                <button class="btn-cancel" id="btnCancelAdd">Anuluj</button>
-                <button class="btn-submit" id="btnSubmitAdd">Dodaj film</button>
+                <button class="btn-cancel" onclick="closeAddModal()">Anuluj</button>
+                <button class="btn-submit" onclick="submitAdd()">Dodaj film</button>
             </div>
-        </div>
-    </div>
-
-    <!-- MODAL: Logowanie (placeholder — Etap 2) -->
-    <div class="modal-overlay" id="modalLogin">
-        <div class="modal">
-            <h2>Zaloguj się</h2>
-            <label>Email</label>
-            <input type="email" id="loginEmail" placeholder="user@example.com" />
-            <label>Hasło</label>
-            <input type="password" id="loginPassword" placeholder="••••••••" />
-            <div class="modal-btns">
-                <button class="btn-cancel" id="btnCancelLogin">Anuluj</button>
-                <button class="btn-submit" id="btnSubmitLogin">Zaloguj</button>
-            </div>
-            <p id="authStatus"
-               style="margin-top:1rem; font-size:0.8rem; color:#555; font-family:sans-serif; text-align:center;">
-            </p>
-        </div>
-    </div>
-
-    <!-- MODAL: Rejestracja -->
-    <div class="modal-overlay" id="modalRegister">
-        <div class="modal">
-            <h2>Utwórz konto</h2>
-
-            <label>Nazwa użytkownika</label>
-            <input type="text" id="regUsername" placeholder="np. Vatorczek" />
-
-            <label>Email</label>
-            <input type="email" id="regEmail" placeholder="user@example.com" />
-
-            <label>Hasło</label>
-            <input type="password" id="regPassword" placeholder="••••••••" />
-
-            <div class="modal-btns">
-                <button class="btn-cancel" id="btnCancelRegister" type="button">Anuluj</button>
-                <button class="btn-submit" id="btnSubmitRegister" type="button">Zarejestruj</button>
-            </div>
-
-            <p style="margin-top:1rem; font-size:0.8rem; color:#555; font-family:sans-serif; text-align:center;">
-                Masz już konto?
-                <a href="#" id="linkOpenLogin" style="color:#e63946; text-decoration:none;">Zaloguj się</a>
-            </p>
         </div>
     </div>
 
     <script>
         const API = '/api';
+        let currentUser = null;
         let usdRate = null;
+        let allMovies = [];
 
-        // ── Helpers ──────────────────────────────────────
+        function getToken() { return sessionStorage.getItem('tf_token'); }
+        function saveAuth(data) {
+            sessionStorage.setItem('tf_token', data.token);
+            currentUser = { username: data.username, email: data.email, role: data.role };
+            sessionStorage.setItem('tf_user', JSON.stringify(currentUser));
+        }
+        function clearAuth() {
+            sessionStorage.removeItem('tf_token');
+            sessionStorage.removeItem('tf_user');
+            currentUser = null;
+        }
+        function loadStoredAuth() {
+            const s = sessionStorage.getItem('tf_user');
+            if (s) currentUser = JSON.parse(s);
+        }
+
+        function updateNavForUser() {
+            if (currentUser) {
+                document.getElementById('navGuest').style.display = 'none';
+                document.getElementById('navUser').style.display = 'flex';
+                document.getElementById('navUsernameText').textContent = currentUser.username;
+                document.getElementById('lockNotice').style.display = 'none';
+            } else {
+                document.getElementById('navGuest').style.display = 'block';
+                document.getElementById('navUser').style.display = 'none';
+                document.getElementById('lockNotice').style.display = 'flex';
+            }
+        }
+
+        function showPage(name) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const key = 'page' + name.charAt(0).toUpperCase() + name.slice(1);
+            document.getElementById(key).classList.add('active');
+            document.getElementById('fabBtn').style.display = name === 'home' ? 'flex' : 'none';
+            if (name === 'profile') updateProfilePage();
+            if (name === 'home') loadMovies();
+        }
+
+        function switchAuthTab(tab) {
+            document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
+            document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
+            document.getElementById('formLogin').classList.toggle('active', tab === 'login');
+            document.getElementById('formRegister').classList.toggle('active', tab === 'register');
+            document.getElementById('loginError').textContent = '';
+            document.getElementById('registerError').textContent = '';
+        }
+
         function toast(msg) {
             const t = document.getElementById('toast');
             t.textContent = msg;
@@ -651,217 +1048,126 @@
             setTimeout(() => t.classList.remove('show'), 2500);
         }
 
-        function showError(msg) {
-            document.getElementById('errorMsg').textContent = msg;
-        }
-
-        function clearError() {
-            document.getElementById('errorMsg').textContent = '';
-        }
-
-        // ── AUTH (JWT) ─────────────────────────────────────
-        const TOKEN_KEY = 'temuflix_token';
-
-        function getToken() {
-            return localStorage.getItem(TOKEN_KEY);
-        }
-
-        function setToken(token) {
-            localStorage.setItem(TOKEN_KEY, token);
-        }
-
-        function clearToken() {
-            localStorage.removeItem(TOKEN_KEY);
-        }
-
-        function authHeaders(extra = {}) {
-            const token = getToken();
-            return token
-                ? { ...extra, Authorization: `Bearer ${token}` }
-                : { ...extra };
-        }
-
-        async function apiFetch(url, options = {}) {
-            const headers = authHeaders(options.headers || {});
-            return fetch(url, { ...options, headers });
-        }
-
-        async function fetchMe() {
-            const token = getToken();
-            if (!token) {
-                document.getElementById('authStatus').textContent = 'Nie jesteś zalogowany.';
-                return null;
-            }
-
-            try {
-                const res = await apiFetch(`${API}/auth/me`);
-                if (!res.ok) {
-                    clearToken();
-                    document.getElementById('authStatus').textContent = 'Sesja wygasła — zaloguj się ponownie.';
-                    return null;
-                }
-
-                const json = await res.json();
-                const me = json.data;
-                document.getElementById('authStatus').textContent =
-                    `Zalogowany jako: ${me.username} (${me.email}) • rola: ${me.role}`;
-
-                // UI (opcjonalnie): zmień tekst przycisku login
-                const btn = document.getElementById('btnOpenLogin');
-                btn.textContent = 'Profil';
-                return me;
-            } catch {
-                document.getElementById('authStatus').textContent = 'Błąd połączenia z API.';
-                return null;
-            }
-        }
-
-        async function login() {
+        async function submitLogin() {
             const email = document.getElementById('loginEmail').value.trim();
-            const password = document.getElementById('loginPassword').value.trim();
-
-            if (!email || !password) {
-                toast('Podaj email i hasło');
-                return;
-            }
-
+            const password = document.getElementById('loginPassword').value;
+            const errEl = document.getElementById('loginError');
+            errEl.textContent = '';
+            if (!email || !password) { errEl.textContent = 'Podaj email i hasło'; return; }
             try {
                 const res = await fetch(`${API}/auth/login`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
                 });
-
                 const json = await res.json();
-
-                if (!res.ok) {
-                    toast(json.message || `Błąd logowania (HTTP ${res.status})`);
-                    return;
-                }
-
-                setToken(json.data.token);
-                toast('Zalogowano ✓');
-                document.getElementById('modalLogin').classList.remove('open');
-
-                await fetchMe();
-            } catch (e) {
-                toast('Błąd połączenia: ' + e.message);
-            }
+                if (!res.ok) { errEl.textContent = json.message || 'Błąd logowania'; return; }
+                saveAuth(json.data);
+                updateNavForUser();
+                toast(`Witaj, ${json.data.username}! 👋`);
+                showPage('home');
+            } catch { errEl.textContent = 'Błąd połączenia z serwerem'; }
         }
 
-        async function register() {
+        async function submitRegister() {
             const username = document.getElementById('regUsername').value.trim();
             const email = document.getElementById('regEmail').value.trim();
-            const password = document.getElementById('regPassword').value.trim();
-
-            if (!username || !email || !password) {
-                toast('Wypełnij wszystkie pola rejestracji');
-                return;
-            }
-
+            const password = document.getElementById('regPassword').value;
+            const errEl = document.getElementById('registerError');
+            errEl.textContent = '';
+            if (!username || !email || !password) { errEl.textContent = 'Wypełnij wszystkie pola'; return; }
+            if (password.length < 6) { errEl.textContent = 'Hasło musi mieć min. 6 znaków'; return; }
             try {
                 const res = await fetch(`${API}/auth/register`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, email, password })
                 });
-
                 const json = await res.json();
-
-                if (!res.ok) {
-                    toast(json.message || `Błąd rejestracji (HTTP ${res.status})`);
-                    return;
-                }
-
-                setToken(json.data.token);
-                toast('Konto utworzone ✓');
-                document.getElementById('modalRegister').classList.remove('open');
-
-                await fetchMe();
-            } catch (e) {
-                toast('Błąd połączenia: ' + e.message);
-            }
+                if (!res.ok) { errEl.textContent = json.message || 'Błąd rejestracji'; return; }
+                saveAuth(json.data);
+                updateNavForUser();
+                toast(`Konto utworzone! Witaj, ${json.data.username}! 🎬`);
+                showPage('home');
+            } catch { errEl.textContent = 'Błąd połączenia z serwerem'; }
         }
 
-        // ── Fetch NBP rate ────────────────────────────────
+        function logout() {
+            clearAuth();
+            updateNavForUser();
+            toast('Wylogowano pomyślnie');
+            showPage('home');
+        }
+
+        function updateProfilePage() {
+            if (!currentUser) { showPage('auth'); return; }
+            document.getElementById('profileAvatar').textContent = currentUser.username.slice(0, 2).toUpperCase();
+            document.getElementById('profileName').textContent = currentUser.username;
+            document.getElementById('profileEmail').textContent = currentUser.email;
+            document.getElementById('profileRole').textContent = currentUser.role;
+            document.getElementById('profileMovieCount').textContent = allMovies.length || '—';
+            document.getElementById('profileUsdRate').textContent = usdRate ? usdRate.toFixed(4) : '—';
+            const rated = allMovies.filter(m => m.rating);
+            document.getElementById('profileAvgRating').textContent = rated.length
+                ? (rated.reduce((s, m) => s + m.rating, 0) / rated.length).toFixed(1) : '—';
+        }
+
         async function fetchUsdRate() {
             try {
-                const res = await fetch('https://api.nbp.pl/api/exchangerates/rates/A/USD?format=json');
+                const res = await fetch(`${API}/nbp/usd`);
                 if (!res.ok) return;
-                const data = await res.json();
-                usdRate = data.rates[0].mid;
-                document.getElementById('statUsdRate').textContent = usdRate.toFixed(4);
-            } catch {
-                document.getElementById('statUsdRate').textContent = 'N/A';
-            }
+                const json = await res.json();
+                usdRate = json.data?.mid;
+                if (usdRate) document.getElementById('statUsdRate').textContent = usdRate.toFixed(4);
+            } catch { document.getElementById('statUsdRate').textContent = 'N/A'; }
         }
 
-        // ── Render movies ─────────────────────────────────
         function renderMovies(movies) {
+            allMovies = movies;
             const grid = document.getElementById('moviesGrid');
             grid.innerHTML = '';
-
             movies.forEach(m => {
                 const card = document.createElement('div');
                 card.className = 'movie-card';
-
                 const priceText = (usdRate && m.priceUSD)
                     ? `$${m.priceUSD.toFixed(2)} / ${(m.priceUSD * usdRate).toFixed(2)} PLN`
                     : (m.priceUSD ? `$${m.priceUSD.toFixed(2)}` : '');
-
                 card.innerHTML = `
-                <div class="movie-poster">
-                  ${m.posterUrl
+            <div class="movie-poster">
+              ${m.posterUrl
                         ? `<img src="${m.posterUrl}" alt="${m.title}" onerror="this.parentElement.innerHTML='<div class=poster-placeholder>🎬</div>'" />`
                         : '<div class="poster-placeholder">🎬</div>'}
-                </div>
-                <div class="movie-info">
-                  <div class="movie-title" title="${m.title}">${m.title}</div>
-                  <div class="genre-tag">${m.genre || ''}</div>
-                  <div class="movie-meta">
-                    <span class="movie-year">${m.year || ''}</span>
-                    <span class="rating-badge">★ ${m.rating || '—'}</span>
-                  </div>
-                  ${priceText ? `<div style="font-size:0.7rem;color:#555;font-family:sans-serif;margin-top:0.3rem">${priceText}</div>` : ''}
-                  <div style="margin-top:0.5rem;text-align:right">
-                    <button class="btn-delete" data-id="${m.id}" title="Usuń film">🗑 Usuń</button>
-                  </div>
-                </div>
-              `;
+            </div>
+            <div class="movie-info">
+              <div class="movie-title" title="${m.title}">${m.title}</div>
+              <div class="genre-tag">${m.genre || ''}</div>
+              <div class="movie-meta">
+                <span class="movie-year">${m.year || ''}</span>
+                <span class="rating-badge">★ ${m.rating || '—'}</span>
+              </div>
+              ${priceText ? `<div class="price-tag">${priceText}</div>` : ''}
+              ${currentUser ? `<div class="card-actions"><button class="btn-delete" data-id="${m.id}">🗑 Usuń</button></div>` : ''}
+            </div>`;
                 grid.appendChild(card);
             });
-
-            // Karta "dodaj"
-            const addCard = document.createElement('div');
-            addCard.className = 'movie-card add-card';
-            addCard.innerHTML = `<div class="add-card-icon">+</div><div class="add-card-label">Dodaj film</div>`;
-            addCard.addEventListener('click', openAddModal);
-            grid.appendChild(addCard);
-
-            // Event listeners na delete
+            if (currentUser) {
+                const addCard = document.createElement('div');
+                addCard.className = 'add-card';
+                addCard.innerHTML = '<div class="add-card-icon">+</div><div class="add-card-label">Dodaj film</div>';
+                addCard.onclick = openAddModal;
+                grid.appendChild(addCard);
+            }
             grid.querySelectorAll('.btn-delete').forEach(btn => {
-                btn.addEventListener('click', e => {
-                    e.stopPropagation();
-                    deleteMovie(parseInt(btn.dataset.id));
-                });
+                btn.addEventListener('click', e => { e.stopPropagation(); deleteMovie(parseInt(btn.dataset.id)); });
             });
-
-            updateStats(movies);
-        }
-
-        // ── Stats ─────────────────────────────────────────
-        function updateStats(movies) {
             document.getElementById('statCount').textContent = movies.length;
             const dirs = new Set(movies.map(m => m.director).filter(Boolean));
             document.getElementById('statDirectors').textContent = dirs.size;
             const rated = movies.filter(m => m.rating);
-            const avg = rated.length ? (rated.reduce((s, m) => s + m.rating, 0) / rated.length).toFixed(1) : '—';
-            document.getElementById('statAvgRating').textContent = avg;
+            document.getElementById('statAvgRating').textContent = rated.length
+                ? (rated.reduce((s, m) => s + m.rating, 0) / rated.length).toFixed(1) : '—';
         }
 
-        // ── Load movies ───────────────────────────────────
         async function loadMovies() {
-            clearError();
+            document.getElementById('errorMsg').textContent = '';
             document.getElementById('loading').style.display = 'block';
             try {
                 const res = await fetch(`${API}/movies`);
@@ -869,30 +1175,40 @@
                 const json = await res.json();
                 renderMovies(json.data || []);
             } catch (e) {
-                showError(`Nie można połączyć z API: ${e.message}. Upewnij się że backend działa.`);
+                document.getElementById('errorMsg').textContent = `Nie można połączyć z API: ${e.message}`;
             } finally {
                 document.getElementById('loading').style.display = 'none';
             }
         }
 
-        // ── Delete movie ──────────────────────────────────
         async function deleteMovie(id) {
+            if (!currentUser) { toast('Zaloguj się aby usuwać filmy'); return; }
             if (!confirm('Usunąć ten film?')) return;
             try {
-                const res = await apiFetch(`${API}/movies/${id}`, { method: 'DELETE' });
+                const res = await fetch(`${API}/movies/${id}`, {
+                    method: 'DELETE', headers: { 'Authorization': `Bearer ${getToken()}` }
+                });
+                if (res.status === 401) { toast('Sesja wygasła — zaloguj się ponownie'); return; }
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 toast('Film usunięty ✓');
                 loadMovies();
-            } catch (e) {
-                toast('Błąd usuwania: ' + e.message);
-            }
+            } catch (e) { toast('Błąd: ' + e.message); }
         }
 
-        // ── Add movie ─────────────────────────────────────
+        function openAddModal() {
+            if (!currentUser) { showPage('auth'); return; }
+            document.getElementById('modalAdd').classList.add('open');
+        }
+        function closeAddModal() {
+            document.getElementById('modalAdd').classList.remove('open');
+            ['addTitle', 'addYear', 'addDirector', 'addGenre', 'addDescription', 'addRating', 'addPrice', 'addPoster']
+                .forEach(id => document.getElementById(id).value = '');
+        }
+
         async function submitAdd() {
+            if (!currentUser) { toast('Zaloguj się aby dodawać filmy'); return; }
             const title = document.getElementById('addTitle').value.trim();
             if (!title) { toast('Tytuł jest wymagany!'); return; }
-
             const movie = {
                 title,
                 year: parseInt(document.getElementById('addYear').value) || 0,
@@ -903,182 +1219,101 @@
                 priceUSD: parseFloat(document.getElementById('addPrice').value) || 0,
                 posterUrl: document.getElementById('addPoster').value.trim() || null,
             };
-
             try {
-                const res = await apiFetch(`${API}/movies`, {
+                const res = await fetch(`${API}/movies`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getToken()}` },
                     body: JSON.stringify(movie)
                 });
-                if (!res.ok) {
-                    const err = await res.json();
-                    toast('Błąd: ' + (err.message || res.status));
-                    return;
-                }
+                if (res.status === 401) { toast('Sesja wygasła — zaloguj się ponownie'); return; }
+                const json = await res.json();
+                if (!res.ok) { toast('Błąd: ' + (json.message || res.status)); return; }
                 closeAddModal();
                 toast('Film dodany pomyślnie ✓');
                 loadMovies();
-            } catch (e) {
-                toast('Błąd połączenia: ' + e.message);
-            }
-        }
-
-        // ── OMDB Search ───────────────────────────────────
-        let lastOmdb = null;
-
-        function clearOmdbResult() {
-            lastOmdb = null;
-            document.getElementById('omdbResult').style.display = 'none';
-            document.getElementById('omdbPoster').innerHTML = '<div class="poster-placeholder">🎬</div>';
-            document.getElementById('omdbTitle').textContent = '—';
-            document.getElementById('omdbMeta').textContent = '';
-            document.getElementById('omdbPlot').textContent = '';
-            document.getElementById('btnImportOmdb').disabled = true;
-        }
-
-        function showOmdbResult(m) {
-            lastOmdb = m;
-
-            // OMDB zwraca pola: Title/Year/Director/Genre/Plot/Poster/imdbRating
-            const title = m?.Title || '—';
-            const year = m?.Year || '';
-            const director = m?.Director || '';
-            const genre = m?.Genre || '';
-            const rating = m?.imdbRating || '';
-
-            document.getElementById('omdbTitle').textContent = year ? `${title} (${year})` : title;
-
-            document.getElementById('omdbMeta').innerHTML = [
-                director ? `Reżyser: <strong style="color:#ddd">${director}</strong>` : null,
-                genre ? `Gatunek: <strong style="color:#ddd">${genre}</strong>` : null,
-                rating ? `IMDb: <strong style="color:#f4c430">${rating}</strong>` : null
-            ].filter(Boolean).join(' • ');
-
-            document.getElementById('omdbPlot').textContent = m?.Plot || '';
-
-            const poster = m?.Poster;
-            if (poster && poster !== 'N/A') {
-                document.getElementById('omdbPoster').innerHTML =
-                    `<img src="${poster}" alt="${title}" onerror="this.parentElement.innerHTML='<div class=poster-placeholder>🎬</div>'" />`;
-            } else {
-                document.getElementById('omdbPoster').innerHTML = '<div class="poster-placeholder">🎬</div>';
-            }
-
-            document.getElementById('omdbResult').style.display = 'block';
-            document.getElementById('btnImportOmdb').disabled = false;
-
-            // przewijamy do wyniku
-            document.getElementById('omdbResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } catch (e) { toast('Błąd połączenia: ' + e.message); }
         }
 
         async function searchOmdb() {
             const query = document.getElementById('searchInput').value.trim();
             if (!query) { toast('Wpisz tytuł do szukania'); return; }
-
+            const resultsDiv = document.getElementById('omdbResults');
+            const list = document.getElementById('omdbList');
+            const titleEl = document.getElementById('omdbResultsTitle');
+            list.innerHTML = '<span style="color:#666;font-family:sans-serif;font-size:0.85rem">Szukam...</span>';
+            resultsDiv.style.display = 'block';
+            document.getElementById('btnClearSearch').style.display = 'inline-block';
             try {
-                const res = await fetch(`${API}/omdb/search?title=${encodeURIComponent(query)}`);
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
+                const res = await fetch(`${API}/omdb/query?q=${encodeURIComponent(query)}`);
                 const json = await res.json();
-
-                if (json.data) {
-                    showOmdbResult(json.data);
-                    toast('Znaleziono w OMDB ✓');
-                } else {
-                    clearOmdbResult();
-                    toast('Nie znaleziono w OMDB');
+                let results = json.data || [];
+                if (results.length === 0) {
+                    const res2 = await fetch(`${API}/omdb/search?title=${encodeURIComponent(query)}`);
+                    if (res2.ok) {
+                        const json2 = await res2.json();
+                        if (json2.data) results = [json2.data];
+                    }
                 }
-            } catch (e) {
-                clearOmdbResult();
-                toast('OMDB API niedostępne');
-            }
-        }
-
-        async function importOmdbToDb() {
-            if (!lastOmdb?.Title) {
-                toast('Najpierw wyszukaj film w OMDB');
-                return;
-            }
-
-            try {
-                const res = await apiFetch(`${API}/omdb/import?title=${encodeURIComponent(lastOmdb.Title)}`, {
-                    method: 'POST'
-                });
-
-                if (!res.ok) {
-                    // Jak masz [Authorize] na imporcie, tu poleci 401 dopóki nie zrobimy logowania w UI
-                    toast(`Nie można zaimportować (HTTP ${res.status}). Zaloguj się jeśli wymagane.`);
+                if (results.length === 0) {
+                    list.innerHTML = '<span style="color:#666;font-family:sans-serif;font-size:0.85rem">Nie znaleziono filmów w OMDB</span>';
                     return;
                 }
-
-                toast('Zaimportowano film do bazy ✓');
-                clearOmdbResult();
-                document.getElementById('searchInput').value = '';
-                loadMovies();
-            } catch (e) {
-                toast('Błąd importu: ' + e.message);
+                titleEl.textContent = `Wyniki OMDB dla "${query}" (${results.length})`;
+                list.innerHTML = '';
+                results.slice(0, 8).forEach(r => {
+                    const item = document.createElement('div');
+                    item.className = 'omdb-item';
+                    const hasPoster = (r.Poster || r.poster) && (r.Poster || r.poster) !== 'N/A';
+                    item.innerHTML = `
+              ${hasPoster
+                        ? `<img src="${r.Poster || r.poster}" alt="${r.title}" onerror="this.style.display='none'" />`
+                            : '<div style="width:36px;height:52px;background:#1a1a24;border-radius:3px;flex-shrink:0"></div>'}
+              <div class="omdb-item-info">
+                <div class="omdb-item-title">${r.Title || r.title || '—'}</div>
+                <div class="omdb-item-year">${r.Year || r.year || ''}</div>
+              </div>
+              ${currentUser ? `<button class="omdb-import-btn" data-title="${r.Title || r.title}">+ Importuj</button>` : ''}`;
+                    list.appendChild(item);
+                });
+                list.querySelectorAll('.omdb-import-btn').forEach(btn => {
+                    btn.addEventListener('click', async e => {
+                        e.stopPropagation();
+                        const t = btn.dataset.title;
+                        btn.textContent = '...'; btn.disabled = true;
+                        try {
+                            const res = await fetch(`${API}/omdb/import?title=${encodeURIComponent(t)}`, {
+                                method: 'POST', headers: { 'Authorization': `Bearer ${getToken()}` }
+                            });
+                            if (res.ok) { toast(`"${t}" zaimportowany ✓`); loadMovies(); btn.textContent = '✓'; }
+                            else { btn.textContent = '✕'; toast('Błąd importu'); }
+                        } catch { btn.textContent = '✕'; }
+                    });
+                });
+            } catch {
+                list.innerHTML = '<span style="color:#e63946;font-family:sans-serif;font-size:0.85rem">Błąd połączenia z OMDB</span>';
             }
         }
 
-
-        // ── Modal helpers ─────────────────────────────────
-        function openAddModal() {
-            document.getElementById('modalAdd').classList.add('open');
-        }
-        function closeAddModal() {
-            document.getElementById('modalAdd').classList.remove('open');
-            ['addTitle', 'addYear', 'addDirector', 'addGenre', 'addDescription', 'addRating', 'addPrice', 'addPoster']
-                .forEach(id => document.getElementById(id).value = '');
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('omdbResults').style.display = 'none';
+            document.getElementById('btnClearSearch').style.display = 'none';
         }
 
-        // ── Event listeners ───────────────────────────────
-        document.getElementById('fabBtn').addEventListener('click', openAddModal);
-        document.getElementById('btnCancelAdd').addEventListener('click', closeAddModal);
-        document.getElementById('btnSubmitAdd').addEventListener('click', submitAdd);
         document.getElementById('btnSearch').addEventListener('click', searchOmdb);
-        document.getElementById('btnClearOmdb').addEventListener('click', clearOmdbResult);
-        document.getElementById('btnImportOmdb').addEventListener('click', importOmdbToDb);
+        document.getElementById('btnClearSearch').addEventListener('click', clearSearch);
         document.getElementById('searchInput').addEventListener('keydown', e => {
             if (e.key === 'Enter') searchOmdb();
+            if (e.key === 'Escape') clearSearch();
+        });
+        document.getElementById('modalAdd').addEventListener('click', e => {
+            if (e.target === document.getElementById('modalAdd')) closeAddModal();
         });
 
-        document.getElementById('btnOpenLogin').addEventListener('click', () => {
-            document.getElementById('modalLogin').classList.add('open');
-        });
-        document.getElementById('btnCancelLogin').addEventListener('click', () => {
-            document.getElementById('modalLogin').classList.remove('open');
-        });
-        document.getElementById('btnSubmitLogin').addEventListener('click', login);
-
-        document.getElementById('btnOpenRegister').addEventListener('click', () => {
-            document.getElementById('modalRegister').classList.add('open');
-        });
-
-        document.getElementById('btnCancelRegister').addEventListener('click', () => {
-            document.getElementById('modalRegister').classList.remove('open');
-        });
-
-        document.getElementById('btnSubmitRegister').addEventListener('click', register);
-
-        document.getElementById('linkOpenLogin').addEventListener('click', (e) => {
-            e.preventDefault();
-            document.getElementById('modalRegister').classList.remove('open');
-            document.getElementById('modalLogin').classList.add('open');
-        });
-
-
-        // Zamknij modal klikając tło
-        document.querySelectorAll('.modal-overlay').forEach(overlay => {
-            overlay.addEventListener('click', e => {
-                if (e.target === overlay) overlay.classList.remove('open');
-            });
-        });
-
-        // ── Init ──────────────────────────────────────────
-        clearOmdbResult();
+        loadStoredAuth();
+        updateNavForUser();
         fetchUsdRate();
         loadMovies();
-        fetchMe();
     </script>
 </body>
 </html>
